@@ -1,4 +1,6 @@
 ﻿using Microsoft.Playwright;
+using NUnit.Framework;
+using ProjectUtilityReporting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +20,15 @@ namespace BDD_Project_Playwright_DotNet.Drivers
 
         public async Task<IPage> InitBrowser(string browserName, bool headless=false, int slomotion=1000)
         {
+
+            var fullClassName = TestContext.CurrentContext.Test.ClassName;
+            var ClassName = fullClassName?.Split('.').Last();
+
+
+            var fullMethodName = TestContext.CurrentContext.Test.MethodName;
+            var MethodName = fullMethodName?.Split('.').Last();
+
+            ExtentReporting.CreateTest("WebReport.html", ClassName + " - " + MethodName ?? "Unknown");
 
             playwright = await Playwright.CreateAsync();
 
@@ -79,7 +90,7 @@ namespace BDD_Project_Playwright_DotNet.Drivers
             }
 
             context = await browser.NewContextAsync();
-         
+            await context.GrantPermissionsAsync(new[] { "geolocation" });
 
             page = await browser.NewPageAsync();
 

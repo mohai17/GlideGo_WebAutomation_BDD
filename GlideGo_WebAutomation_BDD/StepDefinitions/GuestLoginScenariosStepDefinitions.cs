@@ -5,6 +5,7 @@ using Microsoft.Playwright;
 using NUnit.Framework;
 using ProjectUtilityExcel;
 using ProjectUtilityPaths;
+using ProjectUtilityReporting;
 using Reqnroll;
 using System;
 
@@ -39,8 +40,10 @@ namespace GlideGo_WebAutomation_BDD.StepDefinitions
         [Given("I go to the login page URL")]
         public async Task GivenIGoToTheLoginPageURL()
         {
+
             page = await factory.InitBrowser(browserName);
             await page.GotoAsync(url);
+            ExtentReporting.LogInfo($"Goto the url:{url}");
 
         }
 

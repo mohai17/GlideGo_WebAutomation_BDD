@@ -1,5 +1,10 @@
 ﻿using AventStack.ExtentReports;
 using AventStack.ExtentReports.Reporter;
+using Microsoft.Playwright;
+using NUnit.Framework;
+using NUnit.Framework.Interfaces;
+using ProjectUtilityReporting;
+using ProjectUtilityScreenShot;
 using System.IO;
 using System.Reflection;
 
@@ -61,3 +66,34 @@ namespace ProjectUtilityReporting
         }
     }
 }
+
+
+//--------------------------------
+//Usage:
+//In TearDown---------------------
+//await EndTest();
+//ExtentReporting.EndReporting();
+//---------------------------------
+//private async Task EndTest()
+//{
+//    var testStatus = TestContext.CurrentContext.Result.Outcome.Status;
+//    var message = TestContext.CurrentContext.Result.Message;
+
+
+
+//    switch (testStatus)
+//    {
+//        case TestStatus.Failed:
+//            ExtentReporting.LogFail($"Test has failed: {message}");
+//            break;
+//        case TestStatus.Skipped:
+//            ExtentReporting.LogInfo($"Test has skipped: {message}");
+//            break;
+//        case TestStatus.Passed:
+//            ExtentReporting.LogPass("Test passed successfully");
+//            break;
+//    }
+
+//    ExtentReporting.LogScreenshot("Ending Test", await ScreenshotHelper.TakeScreenshotAsync(page, "Element"));
+
+//}
