@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ExcelDataReader" Version="3.8.0" />
+    <PackageReference Include="ExcelDataReader.DataSet" Version="3.8.0" />
+    <PackageReference Include="ExtentReports" Version="5.0.4" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.3.0" />
+    <PackageReference Include="Microsoft.Playwright" Version="1.58.0" />
+    <PackageReference Include="Microsoft.Playwright.NUnit" Version="1.58.0" />
+    <PackageReference Include="Microsoft.Playwright.TestAdapter" Version="1.58.0" />
+    <PackageReference Include="Reqnroll.NUnit" Version="3.3.3" />
+    <PackageReference Include="nunit" Version="4.5.1" />
+    <PackageReference Include="NUnit3TestAdapter" Version="6.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Features\" />
+    <Folder Include="Pages\" />
+    <Folder Include="Resources\TestData\" />
+    <Folder Include="Support\" />
+  </ItemGroup>
+
+</Project>
