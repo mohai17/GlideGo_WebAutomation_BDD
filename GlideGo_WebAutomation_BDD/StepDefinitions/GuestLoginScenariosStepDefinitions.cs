@@ -42,8 +42,16 @@ namespace GlideGo_WebAutomation_BDD.StepDefinitions
         {
 
             page = await factory.InitBrowser(browserName);
-            await page.GotoAsync(url);
+            try
+            {
+                await page.GotoAsync(url);
+            }
+            catch(Exception)
+            {
+                await page.ReloadAsync();
+            }
             ExtentReporting.LogInfo($"Goto the url:{url}");
+            
 
         }
 
@@ -78,7 +86,6 @@ namespace GlideGo_WebAutomation_BDD.StepDefinitions
         [Then("I should see that the login is successful")]
         public async Task ThenIShouldSeeThatTheLoginIsSuccessful()
         {
-   
             LoginPage login = new LoginPage(page);
             bool actualResult = await login.IsLoginSucceed(userType);
 
@@ -125,6 +132,7 @@ namespace GlideGo_WebAutomation_BDD.StepDefinitions
         [Then("I should see that required fields warning displayed")]
         public async Task ThenIShouldSeeThatRequiredFieldsWarningDisplayed()
         {
+
             LoginPage login = new LoginPage(page);
             bool result1 = await login.IsEmailWarningDisplayed();
             bool result2 = await login.IsPasswordWaringDisplayed();

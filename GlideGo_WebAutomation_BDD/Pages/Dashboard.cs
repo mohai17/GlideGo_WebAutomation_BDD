@@ -12,16 +12,18 @@ namespace GlideGoWeb.PageObjects
         IPage page = default!;
         public Dashboard(IPage page)
         {
-
             this.page = page;
-
         }
 
         public async Task ClickOnProfileIcon()
         {
             ExtentReporting.LogInfo("Click on the Profile Icon");
 
-            await page.Locator("//div[@class='rf-page-header-action-item-userletter']").ClickAsync();
+            Thread.Sleep(2000);
+
+            await page.ReloadAsync();
+            await page.WaitForRequestFinishedAsync();
+            await page.Locator("//html[1]/body[1]/div[1]/div[1]/div[3]/div[1]/div[2]/div[6]/div[2]").ClickAsync();
 
         }
 
@@ -30,6 +32,7 @@ namespace GlideGoWeb.PageObjects
             ExtentReporting.LogInfo("Click on the logout button");
 
             await page.Locator("//a[normalize-space()='Logout']").ClickAsync();
+            await page.WaitForRequestFinishedAsync();
 
         }
 

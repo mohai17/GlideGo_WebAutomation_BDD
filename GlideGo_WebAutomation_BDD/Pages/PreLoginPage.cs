@@ -44,6 +44,16 @@ namespace GlideGoWeb.PageObjects
 
         }
 
+        public async Task<bool> IsItPreLoginPage()
+        {
+            ExtentReporting.LogInfo("Checking, User remains on the prelogin page or not");
+
+            string text = await page.Locator("//p[normalize-space()='Sign in to continue']").InnerTextAsync();
+
+            return text.Equals("Sign in to continue");
+            
+        }
+
 
     }
 }
