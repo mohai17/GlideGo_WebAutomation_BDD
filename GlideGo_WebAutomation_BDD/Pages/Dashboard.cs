@@ -19,11 +19,10 @@ namespace GlideGoWeb.PageObjects
         {
             ExtentReporting.LogInfo("Click on the Profile Icon");
 
-            Thread.Sleep(2000);
+            string locator = "//html[1]/body[1]/div[1]/div[1]/div[3]/div[1]/div[2]/div[6]/div[2]";
 
-            await page.ReloadAsync();
-            await page.WaitForRequestFinishedAsync();
-            await page.Locator("//html[1]/body[1]/div[1]/div[1]/div[3]/div[1]/div[2]/div[6]/div[2]").ClickAsync();
+            await page.WaitForSelectorAsync(locator, new() { Timeout = 5000 });
+            await page.Locator(locator).ClickAsync();
 
         }
 

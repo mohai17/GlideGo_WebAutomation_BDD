@@ -18,16 +18,16 @@ namespace GlideGo_WebAutomation_BDD.Features
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Reqnroll", "3.0.0.0")]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [global::NUnit.Framework.TestFixtureAttribute()]
-    [global::NUnit.Framework.DescriptionAttribute("Guest Login Scenarios")]
+    [global::NUnit.Framework.DescriptionAttribute("TC_001_Guest Login Scenarios")]
     [global::NUnit.Framework.FixtureLifeCycleAttribute(global::NUnit.Framework.LifeCycle.InstancePerTestCase)]
-    public partial class GuestLoginScenariosFeature
+    public partial class TC_001_GuestLoginScenariosFeature
     {
         
         private global::Reqnroll.ITestRunner testRunner;
         
         private static string[] featureTags = ((string[])(null));
         
-        private static global::Reqnroll.FeatureInfo featureInfo = new global::Reqnroll.FeatureInfo(new global::System.Globalization.CultureInfo("en-US"), "Features", "Guest Login Scenarios", "  As a user\r\n  I want to attempt login with different credential combinations\r\n  " +
+        private static global::Reqnroll.FeatureInfo featureInfo = new global::Reqnroll.FeatureInfo(new global::System.Globalization.CultureInfo("en-US"), "Features", "TC_001_Guest Login Scenarios", "  As a user\r\n  I want to attempt login with different credential combinations\r\n  " +
                 "So that I can verify the system behavior", global::Reqnroll.ProgrammingLanguage.CSharp, featureTags, InitializeCucumberMessages());
         
 #line 1 "Login.feature"
@@ -110,15 +110,15 @@ namespace GlideGo_WebAutomation_BDD.Features
         }
         
         [global::NUnit.Framework.TestAttribute()]
-        [global::NUnit.Framework.DescriptionAttribute("Login with valid username and valid password")]
+        [global::NUnit.Framework.DescriptionAttribute("TS_001_Login with valid username and valid password")]
         [global::NUnit.Framework.CategoryAttribute("HappyPath")]
-        public async global::System.Threading.Tasks.Task LoginWithValidUsernameAndValidPassword()
+        public async global::System.Threading.Tasks.Task TS_001_LoginWithValidUsernameAndValidPassword()
         {
             string[] tagsOfScenario = new string[] {
                     "HappyPath"};
             global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
             string pickleIndex = "0";
-            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Login with valid username and valid password", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("TS_001_Login with valid username and valid password", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
             string[] tagsOfRule = ((string[])(null));
             global::Reqnroll.RuleInfo ruleInfo = null;
 #line 7
@@ -154,15 +154,15 @@ namespace GlideGo_WebAutomation_BDD.Features
         }
         
         [global::NUnit.Framework.TestAttribute()]
-        [global::NUnit.Framework.DescriptionAttribute("Login with invalid username and valid password")]
+        [global::NUnit.Framework.DescriptionAttribute("TS_002_Login with invalid username and valid password")]
         [global::NUnit.Framework.CategoryAttribute("Negative")]
-        public async global::System.Threading.Tasks.Task LoginWithInvalidUsernameAndValidPassword()
+        public async global::System.Threading.Tasks.Task TS_002_LoginWithInvalidUsernameAndValidPassword()
         {
             string[] tagsOfScenario = new string[] {
                     "Negative"};
             global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
             string pickleIndex = "1";
-            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Login with invalid username and valid password", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("TS_002_Login with invalid username and valid password", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
             string[] tagsOfRule = ((string[])(null));
             global::Reqnroll.RuleInfo ruleInfo = null;
 #line 16
@@ -198,15 +198,15 @@ namespace GlideGo_WebAutomation_BDD.Features
         }
         
         [global::NUnit.Framework.TestAttribute()]
-        [global::NUnit.Framework.DescriptionAttribute("Login with valid username and invalid password")]
+        [global::NUnit.Framework.DescriptionAttribute("TS_003_Login with valid username and invalid password")]
         [global::NUnit.Framework.CategoryAttribute("Negative")]
-        public async global::System.Threading.Tasks.Task LoginWithValidUsernameAndInvalidPassword()
+        public async global::System.Threading.Tasks.Task TS_003_LoginWithValidUsernameAndInvalidPassword()
         {
             string[] tagsOfScenario = new string[] {
                     "Negative"};
             global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
             string pickleIndex = "2";
-            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Login with valid username and invalid password", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("TS_003_Login with valid username and invalid password", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
             string[] tagsOfRule = ((string[])(null));
             global::Reqnroll.RuleInfo ruleInfo = null;
 #line 25
@@ -242,15 +242,15 @@ namespace GlideGo_WebAutomation_BDD.Features
         }
         
         [global::NUnit.Framework.TestAttribute()]
-        [global::NUnit.Framework.DescriptionAttribute("Login with empty username and password fields")]
+        [global::NUnit.Framework.DescriptionAttribute("TS_004_Login with empty username and password fields")]
         [global::NUnit.Framework.CategoryAttribute("Negative")]
-        public async global::System.Threading.Tasks.Task LoginWithEmptyUsernameAndPasswordFields()
+        public async global::System.Threading.Tasks.Task TS_004_LoginWithEmptyUsernameAndPasswordFields()
         {
             string[] tagsOfScenario = new string[] {
                     "Negative"};
             global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
             string pickleIndex = "3";
-            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Login with empty username and password fields", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("TS_004_Login with empty username and password fields", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
             string[] tagsOfRule = ((string[])(null));
             global::Reqnroll.RuleInfo ruleInfo = null;
 #line 34

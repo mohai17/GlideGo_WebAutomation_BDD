@@ -18,16 +18,16 @@ namespace GlideGo_WebAutomation_BDD.Features
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Reqnroll", "3.0.0.0")]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [global::NUnit.Framework.TestFixtureAttribute()]
-    [global::NUnit.Framework.DescriptionAttribute("Logout and session invalidation behavior")]
+    [global::NUnit.Framework.DescriptionAttribute("TC_002_Logout and session invalidation behavior")]
     [global::NUnit.Framework.FixtureLifeCycleAttribute(global::NUnit.Framework.LifeCycle.InstancePerTestCase)]
-    public partial class LogoutAndSessionInvalidationBehaviorFeature
+    public partial class TC_002_LogoutAndSessionInvalidationBehaviorFeature
     {
         
         private global::Reqnroll.ITestRunner testRunner;
         
         private static string[] featureTags = ((string[])(null));
         
-        private static global::Reqnroll.FeatureInfo featureInfo = new global::Reqnroll.FeatureInfo(new global::System.Globalization.CultureInfo("en-US"), "Features", "Logout and session invalidation behavior", "  As an authenticated user\r\n  I want to log out securely\r\n  So that my session is" +
+        private static global::Reqnroll.FeatureInfo featureInfo = new global::Reqnroll.FeatureInfo(new global::System.Globalization.CultureInfo("en-US"), "Features", "TC_002_Logout and session invalidation behavior", "  As an authenticated user\r\n  I want to log out securely\r\n  So that my session is" +
                 " invalidated and cannot be reused across navigation", global::Reqnroll.ProgrammingLanguage.CSharp, featureTags, InitializeCucumberMessages());
         
 #line 1 "Logout.feature"
@@ -122,15 +122,15 @@ namespace GlideGo_WebAutomation_BDD.Features
         }
         
         [global::NUnit.Framework.TestAttribute()]
-        [global::NUnit.Framework.DescriptionAttribute("User logs out successfully")]
+        [global::NUnit.Framework.DescriptionAttribute("TS_001_User logs out successfully")]
         [global::NUnit.Framework.CategoryAttribute("happy_path")]
-        public async global::System.Threading.Tasks.Task UserLogsOutSuccessfully()
+        public async global::System.Threading.Tasks.Task TS_001_UserLogsOutSuccessfully()
         {
             string[] tagsOfScenario = new string[] {
                     "happy_path"};
             global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
             string pickleIndex = "0";
-            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("User logs out successfully", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("TS_001_User logs out successfully", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
             string[] tagsOfRule = ((string[])(null));
             global::Reqnroll.RuleInfo ruleInfo = null;
 #line 12
@@ -157,17 +157,17 @@ namespace GlideGo_WebAutomation_BDD.Features
         }
         
         [global::NUnit.Framework.TestAttribute()]
-        [global::NUnit.Framework.DescriptionAttribute("Back navigation after logout does not restore session")]
+        [global::NUnit.Framework.DescriptionAttribute("TS_002_Back navigation after logout does not restore session")]
         [global::NUnit.Framework.CategoryAttribute("security")]
         [global::NUnit.Framework.CategoryAttribute("no-cache")]
-        public async global::System.Threading.Tasks.Task BackNavigationAfterLogoutDoesNotRestoreSession()
+        public async global::System.Threading.Tasks.Task TS_002_BackNavigationAfterLogoutDoesNotRestoreSession()
         {
             string[] tagsOfScenario = new string[] {
                     "security",
                     "no-cache"};
             global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
             string pickleIndex = "1";
-            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Back navigation after logout does not restore session", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("TS_002_Back navigation after logout does not restore session", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
             string[] tagsOfRule = ((string[])(null));
             global::Reqnroll.RuleInfo ruleInfo = null;
 #line 18
