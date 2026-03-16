@@ -1,6 +1,8 @@
 ﻿using Microsoft.Playwright;
 using NUnit.Framework;
+using NUnit.Framework.Interfaces;
 using ProjectUtilityReporting;
+using ProjectUtilityScreenShot;
 
 
 namespace BDD_Project_Playwright_DotNet.Drivers
@@ -93,6 +95,48 @@ namespace BDD_Project_Playwright_DotNet.Drivers
             page = await context.NewPageAsync();
 
             return page;
+
+        }
+
+        public async Task TearDown()
+        {
+
+            if (page != null && context !=null && browser !=null && playwright!=null)
+            {
+                await EndTest();
+                ExtentReporting.EndReporting();
+
+                await page.CloseAsync();
+                await context.CloseAsync();
+                await browser.CloseAsync();
+                playwright.Dispose(); 
+            }
+        }
+
+        private async Task EndTest()
+        {
+         
+            if (page != null)
+            {
+                var testStatus = TestContext.CurrentContext.Result.Outcome.Status;
+                var message = TestContext.CurrentContext.Result.Message;
+
+                switch (testStatus)
+                {
+                    case TestStatus.Failed:
+                        ExtentReporting.LogFail($"Test has failed: {message}");
+                        break;
+                    case TestStatus.Skipped:
+                        ExtentReporting.LogInfo($"Test has skipped: {message}");
+                        break;
+                    case TestStatus.Passed:
+                        ExtentReporting.LogPass("Test passed successfully");
+                        break;
+                }
+
+                ExtentReporting.LogScreenshot("Ending Test",await ScreenshotHelper.TakeScreenshotAsync(page, "Element"));
+            }
+
 
         }
 

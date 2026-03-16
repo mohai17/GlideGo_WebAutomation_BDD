@@ -1,4 +1,5 @@
 ﻿using Microsoft.Playwright;
+using ProjectUtilityReporting;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,38 +9,53 @@ namespace GlideGoWeb.PageObjects
     internal class TripApprovalPage
     {
 
-        IPage page;
-        
+        private readonly IPage page;
+
+
+        private const string ApprovalButtonLoc = "//span[normalize-space()='Approve']";
+        private const string RejectButtonLoc = "//span[normalize-space()='Reject']";
+        private const string TripApprovalListLoc = "//div[@class='modal-rf-button']";
+        private const string ApprovalSuccessToastLoc = "//div[@class='toaster-rf-title']";
+
         public TripApprovalPage(IPage page)
         {
             this.page = page;
         }
 
+        private async Task<ILocator> WaitForVisibleAsync(string locator)
+        {
+            await page.WaitForSelectorAsync(locator, new PageWaitForSelectorOptions
+            {
+                Timeout = 5000,
+                State = WaitForSelectorState.Visible
+            });
+            return page.Locator(locator);
+        }
+
         public async Task ClickOnApprovalButton()
         {
-
-            await page.Locator("//span[normalize-space()='Approve']").ClickAsync();
-
+            ExtentReporting.LogInfo("Click on the Approval button");
+            await (await WaitForVisibleAsync(ApprovalButtonLoc)).ClickAsync();
         }
 
         public async Task ClickOnRejectButton()
         {
-
-            await page.Locator("//span[normalize-space()='Reject']").ClickAsync();
-
+            ExtentReporting.LogInfo("Click on the Reject button");
+            await (await WaitForVisibleAsync(RejectButtonLoc)).ClickAsync();
         }
 
         public async Task ClickOnTripApprovalList()
         {
-            await page.Locator("//div[@class='modal-rf-button']").ClickAsync();
+            ExtentReporting.LogInfo("Click on the Trip Approval List button");
+            await (await WaitForVisibleAsync(TripApprovalListLoc)).ClickAsync();
         }
 
         public async Task<bool> IsSuccessfullyApproved()
         {
-
-            return await page.Locator("//div[@class='toaster-rf-title']").IsVisibleAsync();
-
+            ExtentReporting.LogInfo("Checking if approval success toast is displayed");
+            return await (await WaitForVisibleAsync(ApprovalSuccessToastLoc)).IsVisibleAsync();
         }
+
 
     }
 }

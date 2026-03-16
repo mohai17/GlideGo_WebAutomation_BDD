@@ -17,15 +17,19 @@ namespace GlideGo_WebAutomation_BDD.StepDefinitions
         private int rowNumber;
         private string username;
         private string password;
+        private LoginPage login = default!;
+        private PreLoginPage pre = default!;
+        private Dashboard dash = default!;
 
         public LogoutAndSessionInvalidationBehaviorStepDefinitions()
         {
-            System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
 
             ExcelReaderUtil.PopulateInCollection(excelpath, "LogoutData");
             rowNumber = Convert.ToInt32(ExcelReaderUtil.ReadData(1, "ConfigRow") ?? string.Empty);
             username = ExcelReaderUtil.ReadData(rowNumber, "Username") ?? string.Empty;
             password = ExcelReaderUtil.ReadData(rowNumber, "Password") ?? string.Empty;
+
+
         }
 
         [Given("the application is available")]
@@ -33,6 +37,9 @@ namespace GlideGo_WebAutomation_BDD.StepDefinitions
         {
 
             page = await factory.InitBrowser(browserName);
+            login = new LoginPage(page);
+            pre = new PreLoginPage(page);
+            dash = new Dashboard(page);
 
             await page.GotoAsync(url);
 
@@ -42,10 +49,9 @@ namespace GlideGo_WebAutomation_BDD.StepDefinitions
         [Given("the user is logged into the web app")]
         public async Task GivenTheUserIsLoggedIntoTheWebApp()
         {
-            PreLoginPage pre = new PreLoginPage(page);
+ 
             await pre.ClickOnContinueAsGuest();
 
-            LoginPage login = new LoginPage(page);
             await login.EnterUsername(username);
             await login.EnterPassword(password);
             await login.ClickOnLoginButton();
@@ -55,19 +61,15 @@ namespace GlideGo_WebAutomation_BDD.StepDefinitions
         [When("the user clicks the Logout button in the header")]
         public async Task WhenTheUserClicksTheLogoutButtonInTheHeader()
         {
-            Dashboard dash = new Dashboard(page);
-
             await dash.ClickOnProfileIcon();
-
             await dash.ClickOnLogoutButton();
         }
 
         [Then("the user should be redirected to the pre-login page")]
         public async Task ThenTheUserShouldBeRedirectedToThePreLoginPage()
         {
-            PreLoginPage pre = new PreLoginPage(page);
-            bool actualResult = await pre.IsItPreLoginPage();
 
+            bool actualResult = await pre.IsItPreLoginPage();
             Assert.That(actualResult, Is.True);
         }
 
@@ -82,9 +84,7 @@ namespace GlideGo_WebAutomation_BDD.StepDefinitions
         [Then("the user remains on the login page")]
         public async Task ThenTheUserRemainsOnTheLoginPage()
         {
-            PreLoginPage pre = new PreLoginPage(page);
             bool actualResult = await pre.IsItPreLoginPage();
-
             Assert.That(actualResult, Is.True);
         }
 

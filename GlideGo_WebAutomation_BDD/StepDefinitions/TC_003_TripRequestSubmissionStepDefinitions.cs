@@ -44,7 +44,6 @@ namespace GlideGo_WebAutomation_BDD.StepDefinitions
 
         public TC_003_TripRequestSubmissionStepDefinitions()
         {
-            System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
 
             ExcelReaderUtil.PopulateInCollection(excelpath, "TripRequestData");
             rowNumber = Convert.ToInt32(ExcelReaderUtil.ReadData(1, "ConfigRow") ?? string.Empty);

@@ -1,4 +1,5 @@
-﻿using BDD_Project_Playwright_DotNet.Drivers;
+﻿using AventStack.ExtentReports;
+using BDD_Project_Playwright_DotNet.Drivers;
 using Microsoft.Playwright;
 using NUnit.Framework;
 using NUnit.Framework.Interfaces;
@@ -21,11 +22,14 @@ namespace GlideGo_WebAutomation_BDD.Drivers
         public string browserName = "";
         public string url = "";
 
-
-        [BeforeScenario]
-        public async Task BrowserSetup()
+        public Setup()
         {
             System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
+        }
+
+        [BeforeScenario(Order = 1)]
+        public async Task BrowserSetup()
+        {
 
             ExcelReaderUtil.PopulateInCollection(excelpath, "BrowserSetup");
             rowNumberBS = Convert.ToInt32(ExcelReaderUtil.ReadData(1, "ConfigRow") ?? string.Empty);
@@ -38,57 +42,15 @@ namespace GlideGo_WebAutomation_BDD.Drivers
 
         }
 
-        [AfterScenario]
-        public async Task TearDown()
+        [AfterScenario(Order = 1)]
+        public async Task AfterScenario()
         {
-            await EndTest();
-            ExtentReporting.EndReporting();
-
-            if (factory?.page != null)
-
-                await factory.page.CloseAsync();
-
-            if (factory?.context != null)
-                await factory.context.CloseAsync();
-
-            if (factory?.browser != null)
-                await factory.browser.CloseAsync();
-
-            factory?.playwright?.Dispose();
-
-
+            
+            await factory.TearDown();
+            
         }
 
-        private async Task EndTest()
-        {
-            var testStatus = TestContext.CurrentContext.Result.Outcome.Status;
-            var message = TestContext.CurrentContext.Result.Message;
-
-
-
-            switch (testStatus)
-            {
-                case TestStatus.Failed:
-                    ExtentReporting.LogFail($"Test has failed: {message}");
-                    break;
-                case TestStatus.Skipped:
-                    ExtentReporting.LogInfo($"Test has skipped: {message}");
-                    break;
-                case TestStatus.Passed:
-                    ExtentReporting.LogPass("Test passed successfully");
-                    break;
-            }
-
-            //ExtentReporting.LogScreenshot("Ending Test", await ScreenshotHelper.TakeScreenshotAsync(page, "Element"));
-
-            if (factory?.page != null)
-            {
-                ExtentReporting.LogScreenshot("Ending Test",
-                    await ScreenshotHelper.TakeScreenshotAsync(factory.page, "Element"));
-            }
-
-
-        }
+        
 
 
 

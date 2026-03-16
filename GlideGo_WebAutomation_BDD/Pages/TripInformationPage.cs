@@ -9,31 +9,45 @@ namespace GlideGoWeb.PageObjects
     internal class TripInformationPage
     {
 
-        IPage page;
+        private readonly IPage page;
+
+        private const string SubmissionButtonLoc = "//button[@class='btn-next']";
+        private const string CancelButtonLoc = "//button[@class='btn-cancel']";
+        private const string SubmissionSuccessLoc = "//div[@class='toaster-rf-message']";
 
         public TripInformationPage(IPage page)
         {
             this.page = page;
         }
 
+        private async Task<ILocator> WaitForVisibleAsync(string locator)
+        {
+            await page.WaitForSelectorAsync(locator, new PageWaitForSelectorOptions
+            {
+                Timeout = 5000,
+                State = WaitForSelectorState.Visible
+            });
+            return page.Locator(locator);
+        }
 
         public async Task ClickOnTripRequestSubmissionButton()
         {
             ExtentReporting.LogInfo("Click on the trip request submission button");
-            await page.Locator("//button[@class='btn-next']").ClickAsync();
+            await (await WaitForVisibleAsync(SubmissionButtonLoc)).ClickAsync();
         }
 
         public async Task ClickOnTripRequestCancelButton()
         {
             ExtentReporting.LogInfo("Click on the trip request cancel button");
-            await page.Locator("//button[@class='btn-cancel']").ClickAsync();
+            await (await WaitForVisibleAsync(CancelButtonLoc)).ClickAsync();
         }
 
         public async Task<bool> IsSubmissionSucceed()
         {
-            ExtentReporting.LogInfo("Checking, Trip Request is successfully submitted or not");
-            return await page.Locator("//div[@class='toaster-rf-message']").IsVisibleAsync();
+            ExtentReporting.LogInfo("Checking if Trip Request is successfully submitted");
+            return await (await WaitForVisibleAsync(SubmissionSuccessLoc)).IsVisibleAsync();
         }
+
 
     }
 }

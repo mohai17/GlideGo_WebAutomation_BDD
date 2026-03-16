@@ -9,116 +9,112 @@ namespace GlideGoWeb.PageObjects
     internal class LoginPage
     {
 
-        IPage page = default!;
+        private readonly IPage page;
+
+        private const string UsernameInput = "//input[@placeholder='Username']";
+        private const string PasswordInput = "//input[@placeholder='Password']";
+        private const string LoginButton = "//button[@type='submit']";
+        private const string BackButton = "//button[@type='button' and @class='gg-back-btn']";
+        private const string ForgotPasswordLink = "//a[@class='rf-login-forgot']";
+        private const string EmailWarning = "//div[normalize-space()='The Email field is required.']";
+        private const string PasswordWarning = "//div[normalize-space()='The Password field is required.']";
+        private const string InvalidLoginWarning = "//div[@class='toaster-rf-title']";
+        private const string TermsOfServiceLink = "//a[normalize-space()='Terms of Service']";
+        private const string PrivacyPolicyLink = "//a[normalize-space()='Privacy Policy']";
+        private const string LoginSuccessTitle = "//div[normalize-space()='New Trip Request']";
+        private const string LogoutSuccessText = "//p[@class='gg-form-subtitle']";
+
         public LoginPage(IPage page)
         {
             this.page = page;
         }
 
+  
+        private async Task<ILocator> WaitForVisibleAsync(string locator)
+        {
+            await page.WaitForSelectorAsync(locator, new PageWaitForSelectorOptions
+            {
+                Timeout = 5000,
+                State = WaitForSelectorState.Visible
+            });
+            return page.Locator(locator);
+        }
+
         public async Task EnterUsername(string username)
         {
             ExtentReporting.LogInfo($"Enter the Username: {username}");
-
-            await page.Locator("//input[@placeholder='Username']").FillAsync(username);
-
+            await (await WaitForVisibleAsync(UsernameInput)).FillAsync(username);
         }
 
         public async Task EnterPassword(string password)
         {
             ExtentReporting.LogInfo($"Enter the User Password: {password}");
-
-            await page.Locator("//input[@placeholder='Password']").FillAsync(password);
-
+            await (await WaitForVisibleAsync(PasswordInput)).FillAsync(password);
         }
 
         public async Task ClickOnLoginButton()
         {
             ExtentReporting.LogInfo("Click on the Login Button");
-
-            await page.Locator("//button[@type='submit']").ClickAsync();
-
+            await (await WaitForVisibleAsync(LoginButton)).ClickAsync();
         }
 
         public async Task ClickOnBackButton()
         {
-            ExtentReporting.LogInfo("Enter the Back Button of Login Page");
-
-            await page.Locator("//button[@type='button' and @class='gg-back-btn']").ClickAsync();
-
+            ExtentReporting.LogInfo("Click on the Back Button of Login Page");
+            await (await WaitForVisibleAsync(BackButton)).ClickAsync();
         }
 
         public async Task ClickOnForgotPassword()
         {
             ExtentReporting.LogInfo("Click on the Forgot Password Link");
-
-            await page.Locator("//a[@class='rf-login-forgot']").ClickAsync();
-
+            await (await WaitForVisibleAsync(ForgotPasswordLink)).ClickAsync();
         }
 
         public async Task<bool> IsEmailWarningDisplayed()
         {
-            ExtentReporting.LogInfo("Checking, the email warning message is displayed or not");
-
-            bool result = await page.Locator("//div[normalize-space()='The Email field is required.']").IsVisibleAsync();
-            
-            return result;
+            ExtentReporting.LogInfo("Checking if the email warning message is displayed");
+            return await (await WaitForVisibleAsync(EmailWarning)).IsVisibleAsync();
         }
 
-        public async Task<bool> IsPasswordWaringDisplayed()
+        public async Task<bool> IsPasswordWarningDisplayed()
         {
-            ExtentReporting.LogInfo("Checking, the password warning message is displayed or not");
-
-            bool result = await page.Locator("//div[normalize-space()='The Password field is required.']").IsVisibleAsync();
-
-            return result;
+            ExtentReporting.LogInfo("Checking if the password warning message is displayed");
+            return await (await WaitForVisibleAsync(PasswordWarning)).IsVisibleAsync();
         }
 
         public async Task<bool> IsInvalidLoginWarningDisplayed()
         {
-            ExtentReporting.LogInfo("Checking, the Invalid Login Warning is displayed or not");
-
-            string actualResult = await page.Locator("//div[@class='toaster-rf-title']").InnerTextAsync();
-            string expectedResult = "Warning";
-
-            bool result = actualResult.Equals(expectedResult);
-
-            return result;
+            ExtentReporting.LogInfo("Checking if the Invalid Login Warning is displayed");
+            string actualResult = await (await WaitForVisibleAsync(InvalidLoginWarning)).InnerTextAsync();
+            return actualResult.Equals("Warning");
         }
 
         public async Task ClickOnTermsOfServices()
         {
-            ExtentReporting.LogInfo("Click on the Terms of services link");
-
-            await page.Locator("//a[normalize-space()='Terms of Service']").ClickAsync();
-
+            ExtentReporting.LogInfo("Click on the Terms of Service link");
+            await (await WaitForVisibleAsync(TermsOfServiceLink)).ClickAsync();
         }
 
         public async Task ClickOnPrivacyPolicy()
         {
             ExtentReporting.LogInfo("Click on the Privacy Policy link");
-
-            await page.Locator("//a[normalize-space()='Privacy Policy']").ClickAsync();
-
+            await (await WaitForVisibleAsync(PrivacyPolicyLink)).ClickAsync();
         }
 
         public async Task<bool> IsLoginSucceed()
         {
-            ExtentReporting.LogInfo("Checking, the login is succeed or not");
-
-            string titleUser = await page.Locator("//div[normalize-space()='New Trip Request']").InnerTextAsync() ?? string.Empty;
-            return titleUser.Equals("New Trip Request");    
-
+            ExtentReporting.LogInfo("Checking if login succeeded");
+            string titleUser = await (await WaitForVisibleAsync(LoginSuccessTitle)).InnerTextAsync() ?? string.Empty;
+            return titleUser.Equals("New Trip Request");
         }
 
         public async Task<bool> IsLogoutSucceed()
         {
-
-            ExtentReporting.LogInfo("Checking, the logout is succeed or not");
-
-            string text = await page.Locator("//p[@class='gg-form-subtitle']").TextContentAsync() ?? string.Empty;
-
+            ExtentReporting.LogInfo("Checking if logout succeeded");
+            string text = await (await WaitForVisibleAsync(LogoutSuccessText)).TextContentAsync() ?? string.Empty;
             return text.Equals("Sign in to continue");
         }
+
 
     }
 }
