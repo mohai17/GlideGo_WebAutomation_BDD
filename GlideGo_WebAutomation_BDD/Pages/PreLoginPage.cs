@@ -10,7 +10,7 @@ namespace GlideGoWeb.PageObjects
     internal class PreLoginPage
     {
 
-        IPage page = default!;
+        IPage page;
 
 
         public PreLoginPage(IPage page)

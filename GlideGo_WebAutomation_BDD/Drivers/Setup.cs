@@ -6,12 +6,7 @@ using ProjectUtilityExcel;
 using ProjectUtilityPaths;
 using ProjectUtilityReporting;
 using ProjectUtilityScreenShot;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Policy;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace GlideGo_WebAutomation_BDD.Drivers
 {
@@ -39,8 +34,8 @@ namespace GlideGo_WebAutomation_BDD.Drivers
             url = ExcelReaderUtil.ReadData(rowNumberBS, "URL") ?? string.Empty;
 
             factory = new PlaywrightFactory();
-
             
+
         }
 
         [AfterScenario]

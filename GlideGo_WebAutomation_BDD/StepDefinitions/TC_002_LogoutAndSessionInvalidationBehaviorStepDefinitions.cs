@@ -11,9 +11,9 @@ using System.Security.Policy;
 namespace GlideGo_WebAutomation_BDD.StepDefinitions
 {
     [Binding]
-    public class LogoutAndSessionInvalidationBehaviorStepDefinitions:Setup
+    public class LogoutAndSessionInvalidationBehaviorStepDefinitions : Setup
     {
-       
+
         private int rowNumber;
         private string username;
         private string password;
@@ -31,16 +31,10 @@ namespace GlideGo_WebAutomation_BDD.StepDefinitions
         [Given("the application is available")]
         public async Task GivenTheApplicationIsAvailable()
         {
-            page = await factory.InitBrowser(browserName);
-            try
-            {
-                await page.GotoAsync(url);
-            }
-            catch (Exception)
-            {
 
-                await page.ReloadAsync();
-            }
+            page = await factory.InitBrowser(browserName);
+
+            await page.GotoAsync(url);
 
             ExtentReporting.LogInfo($"Goto the url:{url}");
         }
@@ -62,9 +56,9 @@ namespace GlideGo_WebAutomation_BDD.StepDefinitions
         public async Task WhenTheUserClicksTheLogoutButtonInTheHeader()
         {
             Dashboard dash = new Dashboard(page);
-          
+
             await dash.ClickOnProfileIcon();
-  
+
             await dash.ClickOnLogoutButton();
         }
 

@@ -35,10 +35,44 @@ namespace GlideGoWeb.PageObjects
 
         }
 
-        
+        public async Task ClickOnCreateNewTrip()
+        {
+            ExtentReporting.LogInfo("Click on the create new trip");
+
+            await page.Locator("//button[@class='link-button active']").ClickAsync();
+        }
+
+        public async Task ClickOnReviewAndApproval()
+        {
+
+            ExtentReporting.LogInfo("Click on Review and Approval");
+
+            await page.Locator("//button[normalize-space()='Review & Approve']").ClickAsync();
+
+        }
+
+        public async Task ClickOnAssignedTripsViewAll()
+        {
+            ExtentReporting.LogInfo("Click on view all of assigned trips");
+
+            var element = page.Locator("(//span[normalize-space()='View All'])[2]");
+            await element.ScrollIntoViewIfNeededAsync();
+            await element.ClickAsync();
+
+        }
+
+        public async Task ClickOnCompletedTripsViewAll()
+        {
+            ExtentReporting.LogInfo("Click on view all of completed trips");
+
+            var element = page.Locator("(//span[normalize-space()='View All'])[3]");
+            await element.ScrollIntoViewIfNeededAsync();
+            await element.ClickAsync();
+
+        }
 
 
-        
+
 
     }
 }

@@ -1,11 +1,7 @@
 ﻿using Microsoft.Playwright;
 using NUnit.Framework;
 using ProjectUtilityReporting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace BDD_Project_Playwright_DotNet.Drivers
 {
@@ -18,7 +14,7 @@ namespace BDD_Project_Playwright_DotNet.Drivers
         public IPage page = default!;
 
 
-        public async Task<IPage> InitBrowser(string browserName, bool headless=false, int slomotion=1000)
+        public async Task<IPage> InitBrowser(string browserName, bool headless = false, int slomotion = 1000)
         {
 
             var fullClassName = TestContext.CurrentContext.Test.ClassName;
@@ -40,7 +36,7 @@ namespace BDD_Project_Playwright_DotNet.Drivers
                         Channel = "chrome",
                         Headless = headless,
                         SlowMo = slomotion,
-                    
+
 
                     });
                     break;
@@ -52,7 +48,7 @@ namespace BDD_Project_Playwright_DotNet.Drivers
                         Channel = "msedge",
                         Headless = headless,
                         SlowMo = slomotion,
-              
+
 
                     });
                     break;
@@ -62,7 +58,7 @@ namespace BDD_Project_Playwright_DotNet.Drivers
                     {
                         Headless = headless,
                         SlowMo = slomotion,
-                     
+
                     });
                     break;
 
@@ -71,7 +67,7 @@ namespace BDD_Project_Playwright_DotNet.Drivers
                     {
                         Headless = headless,
                         SlowMo = slomotion,
-                   
+
                     });
                     break;
 
@@ -80,7 +76,7 @@ namespace BDD_Project_Playwright_DotNet.Drivers
                     {
                         Headless = headless,
                         SlowMo = slomotion,
-                       
+
                     });
                     break;
 
@@ -89,10 +85,12 @@ namespace BDD_Project_Playwright_DotNet.Drivers
                     break;
             }
 
-            context = await browser.NewContextAsync();
-            await context.GrantPermissionsAsync(new[] { "geolocation" });
+            context = await browser.NewContextAsync(new BrowserNewContextOptions
+            {
+                Permissions = new[] { "geolocation" }
+            });
 
-            page = await browser.NewPageAsync();
+            page = await context.NewPageAsync();
 
             return page;
 

@@ -101,23 +101,14 @@ namespace GlideGoWeb.PageObjects
 
         }
 
-        public async Task<bool> IsLoginSucceed(string userType)
+        public async Task<bool> IsLoginSucceed()
         {
             ExtentReporting.LogInfo("Checking, the login is succeed or not");
 
+            string titleUser = await page.Locator("//div[normalize-space()='New Trip Request']").InnerTextAsync() ?? string.Empty;
+            return titleUser.Equals("New Trip Request");    
 
-            if (userType.ToLower().Equals("user"))
-            {
-                string titleUser = await page.Locator("//div[normalize-space()='New Trip Request']").InnerTextAsync() ?? string.Empty;
-                return titleUser.Equals("New Trip Request");
-            }
-            else
-            {
-                string titleAdmin = await page.Locator("//title[normalize-space()='Dashboard']").InnerTextAsync() ?? string.Empty;
-                return titleAdmin.Equals("Dashboard");
-            }
-
-}
+        }
 
         public async Task<bool> IsLogoutSucceed()
         {

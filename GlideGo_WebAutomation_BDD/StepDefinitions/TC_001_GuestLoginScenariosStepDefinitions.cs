@@ -1,57 +1,46 @@
-using BDD_Project_Playwright_DotNet.Drivers;
+
 using GlideGo_WebAutomation_BDD.Drivers;
 using GlideGoWeb.PageObjects;
-using Microsoft.Playwright;
 using NUnit.Framework;
 using ProjectUtilityExcel;
-using ProjectUtilityPaths;
 using ProjectUtilityReporting;
-using Reqnroll;
-using System;
+
 
 namespace GlideGo_WebAutomation_BDD.StepDefinitions
 {
 
     [Binding]
-    public class GuestLoginScenariosStepDefinitions:Setup
+    public class TC_001_GuestLoginScenariosStepDefinitions : Setup
     {
         private int rowNumber;
         private string username;
         private string invalidUsername;
         private string password;
         private string invalidPassword;
-        private string userType;
-  
-        public GuestLoginScenariosStepDefinitions()
+   
+
+        public TC_001_GuestLoginScenariosStepDefinitions()
         {
             System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
-            
+
             ExcelReaderUtil.PopulateInCollection(excelpath, "LoginData");
             rowNumber = Convert.ToInt32(ExcelReaderUtil.ReadData(1, "ConfigRow") ?? string.Empty);
             username = ExcelReaderUtil.ReadData(rowNumber, "Username") ?? string.Empty;
             invalidUsername = ExcelReaderUtil.ReadData(rowNumber, "InvalidUsername") ?? string.Empty;
             password = ExcelReaderUtil.ReadData(rowNumber, "Password") ?? string.Empty;
             invalidPassword = ExcelReaderUtil.ReadData(rowNumber, "InvalidPassword") ?? string.Empty;
-            userType = ExcelReaderUtil.ReadData(rowNumber, "UserType") ?? string.Empty;
-
 
         }
 
         [Given("I go to the login page URL")]
         public async Task GivenIGoToTheLoginPageURL()
         {
-
             page = await factory.InitBrowser(browserName);
-            try
-            {
-                await page.GotoAsync(url);
-            }
-            catch(Exception)
-            {
-                await page.ReloadAsync();
-            }
+
+            await page.GotoAsync(url);
+
             ExtentReporting.LogInfo($"Goto the url:{url}");
-            
+
 
         }
 
@@ -87,7 +76,7 @@ namespace GlideGo_WebAutomation_BDD.StepDefinitions
         public async Task ThenIShouldSeeThatTheLoginIsSuccessful()
         {
             LoginPage login = new LoginPage(page);
-            bool actualResult = await login.IsLoginSucceed(userType);
+            bool actualResult = await login.IsLoginSucceed();
 
             Assert.That(actualResult, Is.True);
         }
@@ -119,7 +108,7 @@ namespace GlideGo_WebAutomation_BDD.StepDefinitions
         {
             LoginPage login = new LoginPage(page);
             await login.EnterUsername("");
-            
+
         }
 
         [When("I keep the password field empty")]
