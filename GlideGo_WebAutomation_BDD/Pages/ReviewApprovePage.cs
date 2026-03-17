@@ -37,6 +37,7 @@ namespace GlideGoWeb.PageObjects
             var element = await WaitForVisibleAsync(tripDetailsLoc);
             await element.ScrollIntoViewIfNeededAsync();
             await element.ClickAsync();
+            
         }
 
     }

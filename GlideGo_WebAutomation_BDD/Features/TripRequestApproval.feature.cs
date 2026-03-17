@@ -18,16 +18,16 @@ namespace GlideGo_WebAutomation_BDD.Features
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Reqnroll", "3.0.0.0")]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [global::NUnit.Framework.TestFixtureAttribute()]
-    [global::NUnit.Framework.DescriptionAttribute("Pending Requests Approval Functionality")]
+    [global::NUnit.Framework.DescriptionAttribute("TC_004_Pending Requests Approval Functionality")]
     [global::NUnit.Framework.FixtureLifeCycleAttribute(global::NUnit.Framework.LifeCycle.InstancePerTestCase)]
-    public partial class PendingRequestsApprovalFunctionalityFeature
+    public partial class TC_004_PendingRequestsApprovalFunctionalityFeature
     {
         
         private global::Reqnroll.ITestRunner testRunner;
         
         private static string[] featureTags = ((string[])(null));
         
-        private static global::Reqnroll.FeatureInfo featureInfo = new global::Reqnroll.FeatureInfo(new global::System.Globalization.CultureInfo("en-US"), "Features", "Pending Requests Approval Functionality", "  As a budget holder or supervisor\r\n  I want to accept or reject pending requests" +
+        private static global::Reqnroll.FeatureInfo featureInfo = new global::Reqnroll.FeatureInfo(new global::System.Globalization.CultureInfo("en-US"), "Features", "TC_004_Pending Requests Approval Functionality", "  As a budget holder or supervisor\r\n  I want to accept or reject pending requests" +
                 "\r\n  So that the system updates the request status accordingly", global::Reqnroll.ProgrammingLanguage.CSharp, featureTags, InitializeCucumberMessages());
         
 #line 1 "TripRequestApproval.feature"
@@ -109,7 +109,7 @@ namespace GlideGo_WebAutomation_BDD.Features
 #line 6
   #line hidden
 #line 7
-    await testRunner.GivenAsync("a pending request exists", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
+    await testRunner.GivenAsync("open the application", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
         }
         
@@ -142,15 +142,21 @@ namespace GlideGo_WebAutomation_BDD.Features
   await this.FeatureBackgroundAsync();
 #line hidden
 #line 10
-    await testRunner.WhenAsync("the budget holder accepts the pending request", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+    await testRunner.WhenAsync("the budget holder logged in", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
 #line 11
-    await testRunner.ThenAsync("the system updates the request status to Accepted for budget holder", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+    await testRunner.AndAsync("the budget holder accepts the pending request", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
 #line 12
-    await testRunner.AndAsync("the supervisor accepts the pending request", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+    await testRunner.ThenAsync("the system updates the request status to Accepted for budget holder", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
 #line 13
+    await testRunner.WhenAsync("the supervisor logged in", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+#line hidden
+#line 14
+    await testRunner.AndAsync("the supervisor accepts the pending request", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+#line hidden
+#line 15
     await testRunner.ThenAsync("the system updates the request status to Accepted for supervisor", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
@@ -167,7 +173,7 @@ namespace GlideGo_WebAutomation_BDD.Features
             global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Budget holder rejects a pending request when flow is budget holder to supervisor", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
             string[] tagsOfRule = ((string[])(null));
             global::Reqnroll.RuleInfo ruleInfo = null;
-#line 15
+#line 17
   this.ScenarioInitialize(scenarioInfo, ruleInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -180,10 +186,13 @@ namespace GlideGo_WebAutomation_BDD.Features
 #line 6
   await this.FeatureBackgroundAsync();
 #line hidden
-#line 16
-    await testRunner.WhenAsync("the budget holder rejects the pending request", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+#line 18
+    await testRunner.WhenAsync("the budget holder logged in", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-#line 17
+#line 19
+    await testRunner.AndAsync("the budget holder rejects the pending request", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+#line hidden
+#line 20
     await testRunner.ThenAsync("the system updates the request status to Rejected", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
@@ -200,7 +209,7 @@ namespace GlideGo_WebAutomation_BDD.Features
             global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Supervisor rejects a pending request when flow is budget holder to supervisor", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
             string[] tagsOfRule = ((string[])(null));
             global::Reqnroll.RuleInfo ruleInfo = null;
-#line 19
+#line 22
   this.ScenarioInitialize(scenarioInfo, ruleInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -213,13 +222,22 @@ namespace GlideGo_WebAutomation_BDD.Features
 #line 6
   await this.FeatureBackgroundAsync();
 #line hidden
-#line 20
-    await testRunner.WhenAsync("the budget holder accept the pending request", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+#line 23
+    await testRunner.WhenAsync("the budget holder logged in", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-#line 21
+#line 24
+    await testRunner.AndAsync("the budget holder accept the pending request", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+#line hidden
+#line 25
+    await testRunner.ThenAsync("the system updates the request status to Accepted for budget holder", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+#line hidden
+#line 26
+    await testRunner.WhenAsync("the supervisor logged in", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+#line hidden
+#line 27
     await testRunner.AndAsync("the supervisor rejects the pending request", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
-#line 22
+#line 28
     await testRunner.ThenAsync("the system updates the request status to Rejected", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
@@ -236,7 +254,7 @@ namespace GlideGo_WebAutomation_BDD.Features
             global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("User accepts a pending request when flow is supervisor to budget holder", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
             string[] tagsOfRule = ((string[])(null));
             global::Reqnroll.RuleInfo ruleInfo = null;
-#line 24
+#line 30
   this.ScenarioInitialize(scenarioInfo, ruleInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -249,16 +267,22 @@ namespace GlideGo_WebAutomation_BDD.Features
 #line 6
   await this.FeatureBackgroundAsync();
 #line hidden
-#line 25
-    await testRunner.WhenAsync("the supervisor accepts the pending request", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+#line 31
+    await testRunner.WhenAsync("the supervisor logged in", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-#line 26
+#line 32
+    await testRunner.AndAsync("the supervisor accepts the pending request", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+#line hidden
+#line 33
     await testRunner.ThenAsync("the system updates the request status to Accepted for supervisor", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
-#line 27
-    await testRunner.WhenAsync("the budget holder accepts the pending request", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+#line 34
+    await testRunner.WhenAsync("the budget holder logged in", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-#line 28
+#line 35
+    await testRunner.AndAsync("the budget holder accepts the pending request", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+#line hidden
+#line 36
     await testRunner.ThenAsync("the system updates the request status to Accepted for budget holder", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
@@ -275,7 +299,7 @@ namespace GlideGo_WebAutomation_BDD.Features
             global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Supervisor rejects a pending request when flow is supervisor to budget holder", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
             string[] tagsOfRule = ((string[])(null));
             global::Reqnroll.RuleInfo ruleInfo = null;
-#line 31
+#line 39
   this.ScenarioInitialize(scenarioInfo, ruleInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -288,10 +312,13 @@ namespace GlideGo_WebAutomation_BDD.Features
 #line 6
   await this.FeatureBackgroundAsync();
 #line hidden
-#line 32
-    await testRunner.WhenAsync("the supervisor rejects the pending request", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+#line 40
+    await testRunner.WhenAsync("the supervisor logged in", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-#line 33
+#line 41
+    await testRunner.AndAsync("the supervisor rejects the pending request", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+#line hidden
+#line 42
     await testRunner.ThenAsync("the system updates the request status to Rejected", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
@@ -308,7 +335,7 @@ namespace GlideGo_WebAutomation_BDD.Features
             global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Budget holder rejects a pending request when flow is supervisor to budget holder", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
             string[] tagsOfRule = ((string[])(null));
             global::Reqnroll.RuleInfo ruleInfo = null;
-#line 35
+#line 44
   this.ScenarioInitialize(scenarioInfo, ruleInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -321,13 +348,22 @@ namespace GlideGo_WebAutomation_BDD.Features
 #line 6
   await this.FeatureBackgroundAsync();
 #line hidden
-#line 36
-    await testRunner.WhenAsync("the supervisor accepts the pending request", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+#line 45
+    await testRunner.WhenAsync("the supervisor logged in", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-#line 37
+#line 46
+    await testRunner.AndAsync("the supervisor accepts the pending request", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+#line hidden
+#line 47
+    await testRunner.ThenAsync("the system updates the request status to Accepted for supervisor", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+#line hidden
+#line 48
+    await testRunner.WhenAsync("the budget holder logged in", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+#line hidden
+#line 49
     await testRunner.AndAsync("the budget holder rejects the pending request", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
-#line 38
+#line 50
     await testRunner.ThenAsync("the system updates the request status to Rejected", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
