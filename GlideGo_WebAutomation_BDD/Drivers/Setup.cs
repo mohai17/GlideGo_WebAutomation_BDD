@@ -27,7 +27,7 @@ namespace GlideGo_WebAutomation_BDD.Drivers
             System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
         }
 
-        [BeforeScenario(Order = 1)]
+        [BeforeScenario]
         public async Task BrowserSetup()
         {
 
@@ -42,7 +42,7 @@ namespace GlideGo_WebAutomation_BDD.Drivers
 
         }
 
-        [AfterScenario(Order = 1)]
+        [AfterScenario]
         public async Task AfterScenario()
         {
             

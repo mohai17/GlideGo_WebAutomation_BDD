@@ -39,6 +39,7 @@ namespace GlideGoWeb.PageObjects
         {
             ExtentReporting.LogInfo($"Choose Starting Point: {location}");
             await (await WaitForVisibleAsync(StartingPointInput)).FillAsync(location);
+         
         }
 
         public async Task ChooseDestinationPoint(string location)
@@ -64,6 +65,9 @@ namespace GlideGoWeb.PageObjects
         {
             ExtentReporting.LogInfo("Click on found location");
             await (await WaitForVisibleAsync(FoundLocationButton)).ClickAsync();
+            await page.Locator("div.leaflet-tile-container img.leaflet-tile").First
+            .WaitForAsync(new LocatorWaitForOptions { State = WaitForSelectorState.Visible });
+
         }
 
 
