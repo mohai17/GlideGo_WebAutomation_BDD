@@ -18,7 +18,7 @@ namespace GlideGo_WebAutomation_BDD.StepDefinitions
         private string password;
         private string startingPoint;
         private string destinationPoint;
-        private string additionalPoint;
+        private string[] additionalPoint;
         private string purpose;
         private string type;
         private string pickupDT;
@@ -46,11 +46,34 @@ namespace GlideGo_WebAutomation_BDD.StepDefinitions
         {
 
             ExcelReaderUtil.PopulateInCollection(excelpath, "TripRequestData");
-            rowNumber = Convert.ToInt32(ExcelReaderUtil.ReadData(1, "ConfigRow") ?? string.Empty);
+            string row = ExcelReaderUtil.ReadData(1, "ConfigRow") ?? string.Empty;
 
+            string[] rowArray = row.Split('-');
+            int arrayLenght = rowArray.Length;
+
+            int[] configRowArray = new int[arrayLenght];
+
+            for (int i = 0; i < arrayLenght; i++)
+            {
+                rowArray[i] = rowArray[i].Trim();
+                configRowArray[i] = Convert.ToInt32(rowArray[i]);
+            }
+
+            int firstConfigRow = configRowArray[0];
+            int lastConfigRow = configRowArray[configRowArray.Length - 1];
+
+            rowNumber = firstConfigRow;
             startingPoint = ExcelReaderUtil.ReadData(rowNumber, "startingPoint") ?? string.Empty;
             destinationPoint = ExcelReaderUtil.ReadData(rowNumber, "destinationPoint") ?? string.Empty;
-            additionalPoint = ExcelReaderUtil.ReadData(rowNumber, "additionalPoint") ?? string.Empty;
+
+            additionalPoint = new string[lastConfigRow];
+
+            for(int i = 0; i<additionalPoint.Length; i++)
+            {
+                additionalPoint[i] = ExcelReaderUtil.ReadData(i+firstConfigRow, "additionalPoint") ?? string.Empty;
+                Console.WriteLine(additionalPoint[i]);
+            }
+            
             username = ExcelReaderUtil.ReadData(rowNumber, "username") ?? string.Empty;
             password = ExcelReaderUtil.ReadData(rowNumber, "password") ?? string.Empty;
             purpose = ExcelReaderUtil.ReadData(rowNumber, "PurposeofTravel") ?? string.Empty;
@@ -122,9 +145,13 @@ namespace GlideGo_WebAutomation_BDD.StepDefinitions
         [When("I add one or more intermediate route points")]
         public async Task WhenIAddOneOrMoreIntermediateRoutePoints()
         {
-           
-            await choose.ChooseAdditionalPoint(additionalPoint);
-            await choose.ClickOnFoundLocation();
+
+            for (int i = 0; i < additionalPoint.Length; i++)
+            {
+                await choose.ChooseAdditionalPoint(additionalPoint[i]);
+                await choose.ClickOnFoundLocation();
+
+            }
             
         }
 
