@@ -1,5 +1,6 @@
 using GlideGo_WebAutomation_BDD.Drivers;
 using GlideGoWeb.PageObjects;
+using NUnit.Framework;
 using ProjectUtilityExcel;
 using ProjectUtilityReporting;
 using Reqnroll;
@@ -94,16 +95,30 @@ namespace GlideGo_WebAutomation_BDD.StepDefinitions
 
         }
 
+
         [When("the budget holder accepts the pending request")]
         public async Task WhenTheBudgetHolderAcceptsThePendingRequest()
         {
-            throw new PendingStepException();
+            for(int i=0; i<budgetHolderUsernames.Length; i++)
+            {
+                await pre.ClickOnContinueAsGuest();
+                await login.EnterUsername(budgetHolderUsernames[i]);
+                await login.EnterPassword(budgetHoldersPasswords[i]);
+                await login.ClickOnLoginButton();
+
+                await dash.ClickOnReviewAndApproval();
+                await review.ClickOnTripDetails(budgetHoldersTripIds[i]);
+                await approval.ClickOnApproveButton();
+
+            }
+
         }
 
         [Then("the system updates the request status to Accepted for budget holder")]
         public async Task ThenTheSystemUpdatesTheRequestStatusToAcceptedForBudgetHolder()
         {
-            throw new PendingStepException();
+            bool actualResult = await approval.IsSuccessfullyApproved();
+            Assert.That(actualResult, Is.True);
         }
 
         [Then("the supervisor accepts the pending request")]
@@ -148,17 +163,6 @@ namespace GlideGo_WebAutomation_BDD.StepDefinitions
             throw new PendingStepException();
         }
 
-        [When("the budget holder logged in")]
-        public void WhenTheBudgetHolderLoggedIn()
-        {
-            throw new PendingStepException();
-        }
-
-        [When("the supervisor logged in")]
-        public void WhenTheSupervisorLoggedIn()
-        {
-            throw new PendingStepException();
-        }
 
 
     }

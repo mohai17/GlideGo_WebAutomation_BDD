@@ -32,7 +32,7 @@ namespace GlideGoWeb.PageObjects
             return page.Locator(locator);
         }
 
-        public async Task ClickOnApprovalButton()
+        public async Task ClickOnApproveButton()
         {
             ExtentReporting.LogInfo("Click on the Approval button");
             await (await WaitForVisibleAsync(ApprovalButtonLoc)).ClickAsync();
