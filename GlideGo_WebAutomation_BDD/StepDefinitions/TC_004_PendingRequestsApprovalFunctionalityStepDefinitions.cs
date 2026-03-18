@@ -205,6 +205,28 @@ namespace GlideGo_WebAutomation_BDD.StepDefinitions
             }
         }
 
+        [When("the supervisor rejects the pending request")]
+        public async Task WhenTheSupervisorRejectsThePendingRequest()
+        {
+            actualResult = true;
+
+            await pre.ClickOnContinueAsGuest();
+            await login.EnterUsername(supervisorsUsername);
+            await login.EnterPassword(supervisorsPassword);
+            await login.ClickOnLoginButton();
+
+            await dash.ClickOnReviewAndApproval();
+            await review.ClickOnTripDetails(tripId);
+            await approval.ClickOnRejectButton();
+            await approval.EnterRejectionReason(SupervisorReason);
+            await approval.ClickOnPopUpRejectButton();
+
+            bool Result = await approval.IsSuccessfullyRejected();
+
+            actualResult = actualResult && Result;
+
+        }
+
         [Then("the system updates the request status to Rejected")]
         public async Task ThenTheSystemUpdatesTheRequestStatusToRejected()
         {
@@ -213,11 +235,7 @@ namespace GlideGo_WebAutomation_BDD.StepDefinitions
         }
 
 
-        [When("the supervisor rejects the pending request")]
-        public async Task WhenTheSupervisorRejectsThePendingRequest()
-        {
-            throw new PendingStepException();
-        }
+
 
 
 

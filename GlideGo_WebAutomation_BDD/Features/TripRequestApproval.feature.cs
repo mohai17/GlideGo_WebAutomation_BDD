@@ -218,7 +218,7 @@ namespace GlideGo_WebAutomation_BDD.Features
   await this.FeatureBackgroundAsync();
 #line hidden
 #line 20
-    await testRunner.WhenAsync("the budget holder accept the pending request", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+    await testRunner.WhenAsync("the budget holder accepts the pending request", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
 #line 21
     await testRunner.ThenAsync("the system updates the request status to Accepted for budget holder", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
