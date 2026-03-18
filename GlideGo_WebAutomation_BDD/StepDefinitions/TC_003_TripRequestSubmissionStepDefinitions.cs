@@ -71,7 +71,7 @@ namespace GlideGo_WebAutomation_BDD.StepDefinitions
             for(int i = 0; i<additionalPoint.Length; i++)
             {
                 additionalPoint[i] = ExcelReaderUtil.ReadData(i+firstConfigRow, "additionalPoint") ?? string.Empty;
-                Console.WriteLine(additionalPoint[i]);
+               
             }
             
             username = ExcelReaderUtil.ReadData(rowNumber, "username") ?? string.Empty;

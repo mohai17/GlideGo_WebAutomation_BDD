@@ -26,7 +26,7 @@ namespace GlideGoWeb.PageObjects
         {
             await page.WaitForSelectorAsync(locator, new PageWaitForSelectorOptions
             {
-                Timeout = 5000,
+                Timeout = 10000,
                 State = WaitForSelectorState.Visible
             });
             return page.Locator(locator);

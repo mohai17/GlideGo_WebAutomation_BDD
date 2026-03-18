@@ -15,7 +15,8 @@ namespace GlideGoWeb.PageObjects
         private const string ApprovalButtonLoc = "//span[normalize-space()='Approve']";
         private const string RejectButtonLoc = "//span[normalize-space()='Reject']";
         private const string TripApprovalListLoc = "//div[@class='modal-rf-button']";
-        private const string ApprovalSuccessToastLoc = "//div[@class='toaster-rf-title']";
+        private const string ApprovalSuccessLoc = "//div[normalize-space()='Trip Request Approved']";
+
 
         public TripApprovalPage(IPage page)
         {
@@ -50,10 +51,12 @@ namespace GlideGoWeb.PageObjects
             await (await WaitForVisibleAsync(TripApprovalListLoc)).ClickAsync();
         }
 
+ 
+
         public async Task<bool> IsSuccessfullyApproved()
         {
             ExtentReporting.LogInfo("Checking if approval success toast is displayed");
-            return await (await WaitForVisibleAsync(ApprovalSuccessToastLoc)).IsVisibleAsync();
+            return await (await WaitForVisibleAsync(ApprovalSuccessLoc)).IsVisibleAsync();
         }
 
 

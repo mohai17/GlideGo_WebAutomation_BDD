@@ -1,5 +1,6 @@
 using GlideGo_WebAutomation_BDD.Drivers;
 using GlideGoWeb.PageObjects;
+using Microsoft.Playwright;
 using NUnit.Framework;
 using ProjectUtilityExcel;
 using ProjectUtilityReporting;
@@ -12,15 +13,12 @@ namespace GlideGo_WebAutomation_BDD.StepDefinitions
     public class TC_004_PendingRequestsApprovalFunctionalityStepDefinitions:Setup
     {
         private int rowNumber;
-        private string username;
-        private string password;
-        private string userTripId;
         private string[] budgetHolderUsernames;
-        private string[] supervisorsUsernames;
         private string[] budgetHoldersPasswords;
-        private string[] supervisorsPasswords;
-        private string[] budgetHoldersTripIds;
-        private string[] supervisorsTripIds;
+        private string supervisorsUsername;
+        private string supervisorsPassword;
+        private string tripId;
+        private bool actualResult = true;
 
         private PreLoginPage pre = default!;
         private LoginPage login = default!;
@@ -50,31 +48,20 @@ namespace GlideGo_WebAutomation_BDD.StepDefinitions
             int lastConfigRow = configRowArray[configRowArray.Length - 1];
 
             rowNumber = firstConfigRow;
-            
-            username = ExcelReaderUtil.ReadData(rowNumber, "Username") ?? string.Empty;
-            password = ExcelReaderUtil.ReadData(rowNumber, "Password") ?? string.Empty;
-            userTripId = ExcelReaderUtil.ReadData(rowNumber, "UserTripId") ?? string.Empty;
 
             budgetHolderUsernames = new string[lastConfigRow];
-            budgetHoldersPasswords = new string[lastConfigRow];
-            budgetHoldersTripIds = new string[lastConfigRow];
-
-            supervisorsUsernames = new string[lastConfigRow];
-            supervisorsPasswords = new string[lastConfigRow];
-            supervisorsTripIds = new string[lastConfigRow];
+            budgetHoldersPasswords = new string[lastConfigRow];         
 
             for(int i=0; i<lastConfigRow; i++)
             {
-                budgetHolderUsernames[i] = ExcelReaderUtil.ReadData(i + firstConfigRow, "BudgetHolderUserName") ?? string.Empty;
+                budgetHolderUsernames[i] = ExcelReaderUtil.ReadData(i + firstConfigRow, "BudgetHolderUsername") ?? string.Empty;
                 budgetHoldersPasswords[i] = ExcelReaderUtil.ReadData(i + firstConfigRow, "BudgetHolderPassword") ?? string.Empty;
-                budgetHoldersTripIds[i] = ExcelReaderUtil.ReadData(i + firstConfigRow, "BudgetHolderTripId") ?? string.Empty;
-                supervisorsUsernames[i] = ExcelReaderUtil.ReadData(i + firstConfigRow, "SupervisorUsername") ?? string.Empty;
-                supervisorsPasswords[i] = ExcelReaderUtil.ReadData(i + firstConfigRow, "SupervisorPassword") ?? string.Empty;
-                supervisorsTripIds[i] = ExcelReaderUtil.ReadData(i + firstConfigRow, "SupervisorTripId") ?? string.Empty;
-
 
             }
 
+            tripId = ExcelReaderUtil.ReadData(rowNumber, "TripId") ?? string.Empty;
+            supervisorsUsername = ExcelReaderUtil.ReadData(rowNumber, "SupervisorUsername") ?? string.Empty;
+            supervisorsPassword = ExcelReaderUtil.ReadData(rowNumber, "SupervisorPassword") ?? string.Empty;
 
         }
 
@@ -95,10 +82,13 @@ namespace GlideGo_WebAutomation_BDD.StepDefinitions
 
         }
 
+        
 
         [When("the budget holder accepts the pending request")]
         public async Task WhenTheBudgetHolderAcceptsThePendingRequest()
         {
+            actualResult = true;
+
             for(int i=0; i<budgetHolderUsernames.Length; i++)
             {
                 await pre.ClickOnContinueAsGuest();
@@ -107,31 +97,61 @@ namespace GlideGo_WebAutomation_BDD.StepDefinitions
                 await login.ClickOnLoginButton();
 
                 await dash.ClickOnReviewAndApproval();
-                await review.ClickOnTripDetails(budgetHoldersTripIds[i]);
+                await review.ClickOnTripDetails(tripId);
                 await approval.ClickOnApproveButton();
 
+                bool Result = await approval.IsSuccessfullyApproved();
+                await approval.ClickOnTripApprovalList();
+                await dash.ClickOnProfileIcon();
+                await dash.ClickOnLogoutButton();
+                await page.WaitForLoadStateAsync(LoadState.DOMContentLoaded);
+                actualResult = actualResult && Result;
+
             }
+
 
         }
 
         [Then("the system updates the request status to Accepted for budget holder")]
         public async Task ThenTheSystemUpdatesTheRequestStatusToAcceptedForBudgetHolder()
         {
-            bool actualResult = await approval.IsSuccessfullyApproved();
+            Assert.That(actualResult, Is.True);
+        }
+
+        [When("the supervisor accepts the pending request")]
+        public async Task WhenTheSupervisorAcceptsThePendingRequest()
+        {
+                actualResult = true;
+
+                await pre.ClickOnContinueAsGuest();
+                await login.EnterUsername(supervisorsUsername);
+                await login.EnterPassword(supervisorsPassword);
+                await login.ClickOnLoginButton();
+
+                await dash.ClickOnReviewAndApproval();
+                await review.ClickOnTripDetails(tripId);
+                await approval.ClickOnApproveButton();
+
+                bool Result = await approval.IsSuccessfullyApproved();
+
+                actualResult = actualResult && Result;
+                
+            
+        }
+
+        [Then("the system updates the request status to Accepted for supervisor")]
+        public async Task ThenTheSystemUpdatesTheRequestStatusToAcceptedForSupervisor()
+        {
             Assert.That(actualResult, Is.True);
         }
 
         [Then("the supervisor accepts the pending request")]
         public async Task ThenTheSupervisorAcceptsThePendingRequest()
         {
-            throw new PendingStepException();
+            
         }
 
-        [Then("the system updates the request status to Accepted for supervisor")]
-        public async Task ThenTheSystemUpdatesTheRequestStatusToAcceptedForSupervisor()
-        {
-            throw new PendingStepException();
-        }
+
 
         [When("the budget holder rejects the pending request")]
         public async Task WhenTheBudgetHolderRejectsThePendingRequest()
@@ -157,11 +177,7 @@ namespace GlideGo_WebAutomation_BDD.StepDefinitions
             throw new PendingStepException();
         }
 
-        [When("the supervisor accepts the pending request")]
-        public async Task WhenTheSupervisorAcceptsThePendingRequest()
-        {
-            throw new PendingStepException();
-        }
+
 
 
 
