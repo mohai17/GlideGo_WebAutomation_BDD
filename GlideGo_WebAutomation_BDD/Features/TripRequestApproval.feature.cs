@@ -119,13 +119,15 @@ namespace GlideGo_WebAutomation_BDD.Features
         }
         
         [global::NUnit.Framework.TestAttribute()]
-        [global::NUnit.Framework.DescriptionAttribute("TS_001_User accepts a pending request when flow is budget holder to supervisor")]
-        public async global::System.Threading.Tasks.Task TS_001_UserAcceptsAPendingRequestWhenFlowIsBudgetHolderToSupervisor()
+        [global::NUnit.Framework.DescriptionAttribute("TS_001_Budget Holder and Supervisor accept a pending request when flow is budget " +
+            "holder to supervisor")]
+        public async global::System.Threading.Tasks.Task TS_001_BudgetHolderAndSupervisorAcceptAPendingRequestWhenFlowIsBudgetHolderToSupervisor()
         {
             string[] tagsOfScenario = ((string[])(null));
             global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
             string pickleIndex = "0";
-            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("TS_001_User accepts a pending request when flow is budget holder to supervisor", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("TS_001_Budget Holder and Supervisor accept a pending request when flow is budget " +
+                    "holder to supervisor", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
             string[] tagsOfRule = ((string[])(null));
             global::Reqnroll.RuleInfo ruleInfo = null;
 #line 9
@@ -234,15 +236,15 @@ namespace GlideGo_WebAutomation_BDD.Features
         }
         
         [global::NUnit.Framework.TestAttribute()]
-        [global::NUnit.Framework.DescriptionAttribute("TS_004_Supervisor accepts a pending request when flow is supervisor to budget hol" +
-            "der")]
-        public async global::System.Threading.Tasks.Task TS_004_SupervisorAcceptsAPendingRequestWhenFlowIsSupervisorToBudgetHolder()
+        [global::NUnit.Framework.DescriptionAttribute("TS_004_Supervisor and Budget Holder accept a pending request when flow is supervi" +
+            "sor to budget holder")]
+        public async global::System.Threading.Tasks.Task TS_004_SupervisorAndBudgetHolderAcceptAPendingRequestWhenFlowIsSupervisorToBudgetHolder()
         {
             string[] tagsOfScenario = ((string[])(null));
             global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
             string pickleIndex = "3";
-            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("TS_004_Supervisor accepts a pending request when flow is supervisor to budget hol" +
-                    "der", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("TS_004_Supervisor and Budget Holder accept a pending request when flow is supervi" +
+                    "sor to budget holder", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
             string[] tagsOfRule = ((string[])(null));
             global::Reqnroll.RuleInfo ruleInfo = null;
 #line 25
