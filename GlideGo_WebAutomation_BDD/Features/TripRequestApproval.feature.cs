@@ -234,13 +234,15 @@ namespace GlideGo_WebAutomation_BDD.Features
         }
         
         [global::NUnit.Framework.TestAttribute()]
-        [global::NUnit.Framework.DescriptionAttribute("TS_004_User accepts a pending request when flow is supervisor to budget holder")]
-        public async global::System.Threading.Tasks.Task TS_004_UserAcceptsAPendingRequestWhenFlowIsSupervisorToBudgetHolder()
+        [global::NUnit.Framework.DescriptionAttribute("TS_004_Supervisor accepts a pending request when flow is supervisor to budget hol" +
+            "der")]
+        public async global::System.Threading.Tasks.Task TS_004_SupervisorAcceptsAPendingRequestWhenFlowIsSupervisorToBudgetHolder()
         {
             string[] tagsOfScenario = ((string[])(null));
             global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
             string pickleIndex = "3";
-            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("TS_004_User accepts a pending request when flow is supervisor to budget holder", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("TS_004_Supervisor accepts a pending request when flow is supervisor to budget hol" +
+                    "der", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
             string[] tagsOfRule = ((string[])(null));
             global::Reqnroll.RuleInfo ruleInfo = null;
 #line 25

@@ -22,7 +22,7 @@ Feature: TC_004_Pending Requests Approval Functionality
     When the supervisor rejects the pending request
     Then the system updates the request status to Rejected
 
-  Scenario: TS_004_User accepts a pending request when flow is supervisor to budget holder
+  Scenario: TS_004_Supervisor accepts a pending request when flow is supervisor to budget holder
     When the supervisor accepts the pending request
     Then the system updates the request status to Accepted for supervisor
     When the budget holder accepts the pending request

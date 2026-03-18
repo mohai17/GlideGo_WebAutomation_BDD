@@ -4,6 +4,7 @@ using Microsoft.Playwright;
 using NUnit.Framework;
 using ProjectUtilityExcel;
 using ProjectUtilityReporting;
+using ProjectUtilityScreenShot;
 using Reqnroll;
 using System;
 
@@ -108,11 +109,13 @@ namespace GlideGo_WebAutomation_BDD.StepDefinitions
                 await approval.ClickOnApproveButton();
 
                 bool Result = await approval.IsSuccessfullyApproved();
+                ExtentReporting.LogScreenshot("Approval", await ScreenshotHelper.TakeScreenshotAsync(page, "Element"));
                 await approval.ClickOnTripApprovalList();
                 await dash.ClickOnProfileIcon();
                 await dash.ClickOnLogoutButton();
                 await page.WaitForLoadStateAsync(LoadState.DOMContentLoaded);
-                
+                ExtentReporting.LogScreenshot("Logout", await ScreenshotHelper.TakeScreenshotAsync(page, "Element"));
+
                 actualResult = actualResult && Result;
 
             }
@@ -129,6 +132,7 @@ namespace GlideGo_WebAutomation_BDD.StepDefinitions
         [When("the supervisor accepts the pending request")]
         public async Task WhenTheSupervisorAcceptsThePendingRequest()
         {
+         
                 actualResult = true;
 
                 await pre.ClickOnContinueAsGuest();
@@ -141,14 +145,23 @@ namespace GlideGo_WebAutomation_BDD.StepDefinitions
                 await approval.ClickOnApproveButton();
 
                 bool Result1 = await approval.IsSuccessfullyApproved();
+                ExtentReporting.LogScreenshot("Approval", await ScreenshotHelper.TakeScreenshotAsync(page, "Element"));
 
                 await approval.ClickOnTripApprovalList();
 
                 bool Result2 = await approval.IsSuccessfullyDataSaved();
+                ExtentReporting.LogScreenshot("Data Saved", await ScreenshotHelper.TakeScreenshotAsync(page, "Element"));
 
                 actualResult = actualResult && Result1 && Result2;
                 
-            
+    
+                await dash.ClickOnProfileIcon();
+                await dash.ClickOnLogoutButton();
+                await page.WaitForLoadStateAsync(LoadState.DOMContentLoaded);
+                ExtentReporting.LogScreenshot("Logout", await ScreenshotHelper.TakeScreenshotAsync(page, "Element"));
+
+
+
         }
 
         [Then("the system updates the request status to Accepted for supervisor")]
@@ -181,6 +194,7 @@ namespace GlideGo_WebAutomation_BDD.StepDefinitions
                     await approval.ClickOnPopUpRejectButton();
 
                     bool Result = await approval.IsSuccessfullyRejected();
+                    ExtentReporting.LogScreenshot("Rejected", await ScreenshotHelper.TakeScreenshotAsync(page, "Element"));
                     actualResult = (!actualResult) && Result;
 
                     break;
@@ -191,12 +205,14 @@ namespace GlideGo_WebAutomation_BDD.StepDefinitions
                     await approval.ClickOnApproveButton();
 
                     bool Result = await approval.IsSuccessfullyApproved();
+                    ExtentReporting.LogScreenshot("Approval", await ScreenshotHelper.TakeScreenshotAsync(page, "Element"));
                     if (Result)
                     {
                         await approval.ClickOnTripApprovalList();
                         await dash.ClickOnProfileIcon();
                         await dash.ClickOnLogoutButton();
                         await page.WaitForLoadStateAsync(LoadState.DOMContentLoaded);
+                        ExtentReporting.LogScreenshot("Logout", await ScreenshotHelper.TakeScreenshotAsync(page, "Element"));
                     }
 
                 }
@@ -222,6 +238,7 @@ namespace GlideGo_WebAutomation_BDD.StepDefinitions
             await approval.ClickOnPopUpRejectButton();
 
             bool Result = await approval.IsSuccessfullyRejected();
+            ExtentReporting.LogScreenshot("Rejected", await ScreenshotHelper.TakeScreenshotAsync(page, "Element"));
 
             actualResult = actualResult && Result;
 
