@@ -132,9 +132,13 @@ namespace GlideGo_WebAutomation_BDD.StepDefinitions
                 await review.ClickOnTripDetails(tripId);
                 await approval.ClickOnApproveButton();
 
-                bool Result = await approval.IsSuccessfullyApproved();
+                bool Result1 = await approval.IsSuccessfullyApproved();
 
-                actualResult = actualResult && Result;
+                await approval.ClickOnTripApprovalList();
+
+                bool Result2 = await approval.IsSuccessfullyDataSaved();
+
+                actualResult = actualResult && Result1 && Result2;
                 
             
         }
