@@ -18,6 +18,7 @@ namespace GlideGoWeb.PageObjects
         private const string ReviewApprovalLoc = "//button[normalize-space()='Review & Approve']";
         private const string AssignedTripsViewAllLoc = "(//span[normalize-space()='View All'])[2]";
         private const string CompletedTripsViewAllLoc = "(//span[normalize-space()='View All'])[3]";
+        private const string SOFManagementLoc = "//button[normalize-space()='Manage Your SOF']";
 
         public Dashboard(IPage page)
         {
@@ -70,6 +71,15 @@ namespace GlideGoWeb.PageObjects
         {
             ExtentReporting.LogInfo("Click on view all of completed trips");
             var element = await WaitForVisibleAsync(CompletedTripsViewAllLoc);
+            await element.ScrollIntoViewIfNeededAsync();
+            await element.ClickAsync();
+        }
+
+        public async Task ClickOnSOFManagement()
+        {
+            ExtentReporting.LogInfo("Click on SOF Management");
+
+            var element = await WaitForVisibleAsync(SOFManagementLoc);
             await element.ScrollIntoViewIfNeededAsync();
             await element.ClickAsync();
         }

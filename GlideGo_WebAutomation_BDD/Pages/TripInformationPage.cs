@@ -33,19 +33,26 @@ namespace GlideGoWeb.PageObjects
         public async Task ClickOnTripRequestSubmissionButton()
         {
             ExtentReporting.LogInfo("Click on the trip request submission button");
-            await (await WaitForVisibleAsync(SubmissionButtonLoc)).ClickAsync();
+            var element = await WaitForVisibleAsync(SubmissionButtonLoc);
+            await element.ScrollIntoViewIfNeededAsync();
+            await element.ClickAsync();
         }
 
         public async Task ClickOnTripRequestCancelButton()
         {
             ExtentReporting.LogInfo("Click on the trip request cancel button");
-            await (await WaitForVisibleAsync(CancelButtonLoc)).ClickAsync();
+            var element = await WaitForVisibleAsync(CancelButtonLoc);
+            await element.ScrollIntoViewIfNeededAsync();
+            await element.ClickAsync();
+
+
         }
 
         public async Task<bool> IsSubmissionSucceed()
         {
             ExtentReporting.LogInfo("Checking if Trip Request is successfully submitted");
             return await (await WaitForVisibleAsync(SubmissionSuccessLoc)).IsVisibleAsync();
+
         }
 
 

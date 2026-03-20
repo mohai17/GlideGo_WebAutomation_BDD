@@ -122,10 +122,12 @@ namespace GlideGoWeb.PageObjects
 
         public async Task ClickOnPickUpDateAndTime()
         {
-            ExtentReporting.LogInfo("Click on the Pick up date and time");
-            await page.EvaluateAsync("window.scrollBy(0, 50)");
+            //ExtentReporting.LogInfo("Click on the Pick up date and time");
+            //await page.EvaluateAsync("window.scrollBy(0, 50)");
+
             var loc = L(Sel.PickupDateTimeInput);
             await WaitVisibleAsync(loc);
+            await loc.ScrollIntoViewIfNeededAsync();
             await loc.ClickAsync();
         }
 
@@ -144,38 +146,47 @@ namespace GlideGoWeb.PageObjects
 
             var yearInput = L(Sel.DatepickerYearInput);
             await WaitVisibleAsync(yearInput);
+            await yearInput.ScrollIntoViewIfNeededAsync();
             await yearInput.FillAsync(year);
 
             var monthHeader = L(Sel.DatepickerMonthHeader);
             await WaitVisibleAsync(monthHeader);
+            await monthHeader.ScrollIntoViewIfNeededAsync();
             await monthHeader.ClickAsync();
 
             var monthItem = L(Sel.MonthItem(month));
             await WaitVisibleAsync(monthItem);
+            await monthItem.ScrollIntoViewIfNeededAsync();
             await monthItem.ClickAsync();
 
             var dayCell = L(Sel.DayCell(day));
             await WaitVisibleAsync(dayCell);
+            await dayCell.ScrollIntoViewIfNeededAsync();
             await dayCell.ClickAsync();
 
             var hoursInput = L(Sel.TimeHoursInput);
             await WaitVisibleAsync(hoursInput);
+            await hoursInput.ScrollIntoViewIfNeededAsync();
             await hoursInput.FillAsync(hours);
 
             var minutesInput = L(Sel.TimeMinutesInput);
             await WaitVisibleAsync(minutesInput);
+            await minutesInput.ScrollIntoViewIfNeededAsync();
             await minutesInput.FillAsync(minutes);
 
             var secondsInput = L(Sel.TimeSecondsInput);
             await WaitVisibleAsync(secondsInput);
+            await secondsInput.ScrollIntoViewIfNeededAsync();
             await secondsInput.FillAsync(seconds);
 
             var meridiemBtn = L(Sel.Meridiem(meridiem));
             await WaitVisibleAsync(meridiemBtn);
+            await meridiemBtn.ScrollIntoViewIfNeededAsync();
             await meridiemBtn.ClickAsync();
 
             var doneBtn = L(Sel.DatepickerDone);
             await WaitVisibleAsync(doneBtn);
+            await doneBtn.ScrollIntoViewIfNeededAsync();
             await doneBtn.ClickAsync();
         }
 
@@ -184,6 +195,7 @@ namespace GlideGoWeb.PageObjects
             ExtentReporting.LogInfo("Click on the drop off date and time");
             var loc = L(Sel.DropoffDateTimeInput);
             await WaitVisibleAsync(loc);
+            await loc.ScrollIntoViewIfNeededAsync();
             await loc.ClickAsync();
         }
 
@@ -203,40 +215,49 @@ namespace GlideGoWeb.PageObjects
 
             var yearInput = L(Sel.DatepickerYearInput);
             await WaitVisibleAsync(yearInput);
+            await yearInput.ScrollIntoViewIfNeededAsync();
             await yearInput.FillAsync(year);
 
             var monthHeader = L(Sel.DatepickerMonthHeader);
             await WaitVisibleAsync(monthHeader);
+            await monthHeader.ScrollIntoViewIfNeededAsync();
             await monthHeader.ClickAsync();
 
             var monthItem = L(Sel.MonthItem(month));
             await WaitVisibleAsync(monthItem);
+            await monthItem.ScrollIntoViewIfNeededAsync();
             await monthItem.ClickAsync();
 
             var dayCell = L(Sel.DayCell(day));
             await WaitVisibleAsync(dayCell);
+            await dayCell.ScrollIntoViewIfNeededAsync();
             await dayCell.ClickAsync();
 
             var hoursInput = L(Sel.TimeHoursInput);
             await WaitVisibleAsync(hoursInput);
+            await hoursInput.ScrollIntoViewIfNeededAsync();
             await hoursInput.FillAsync(hours12);
 
             var minutesInput = L(Sel.TimeMinutesInput);
             await WaitVisibleAsync(minutesInput);
+            await minutesInput.ScrollIntoViewIfNeededAsync();
             await minutesInput.FillAsync(minutes);
 
             var secondsInput = L(Sel.TimeSecondsInput);
             await WaitVisibleAsync(secondsInput);
+            await secondsInput.ScrollIntoViewIfNeededAsync();
             await secondsInput.FillAsync(seconds);
 
             var meridiemBtn = L(Sel.Meridiem(meridiem));
             await WaitVisibleAsync(meridiemBtn);
+            await meridiemBtn.ScrollIntoViewIfNeededAsync();
             await meridiemBtn.ClickAsync();
 
-            await page.EvaluateAsync("window.scrollBy(0, 300)");
+            //await page.EvaluateAsync("window.scrollBy(0, 300)");
 
             var doneBtn = L(Sel.DatepickerDone);
             await WaitVisibleAsync(doneBtn);
+            await doneBtn.ScrollIntoViewIfNeededAsync();
             await doneBtn.ClickAsync();
         }
 
@@ -265,6 +286,7 @@ namespace GlideGoWeb.PageObjects
             ExtentReporting.LogInfo($"Enter lead passenger phone number: {lpphone}");
             var loc = L(Sel.LeadPassengerPhoneInput);
             await WaitVisibleAsync(loc);
+            await loc.ScrollIntoViewIfNeededAsync();
             await loc.FillAsync(lpphone);
         }
 
@@ -273,6 +295,7 @@ namespace GlideGoWeb.PageObjects
             ExtentReporting.LogInfo("Click on the lead passenger supervisor");
             var loc = L(Sel.LeadPassengerSupervisorDropdown);
             await WaitVisibleAsync(loc);
+            await loc.ScrollIntoViewIfNeededAsync();
             await loc.ClickAsync();
         }
 
@@ -293,6 +316,7 @@ namespace GlideGoWeb.PageObjects
             ExtentReporting.LogInfo("Click on other SCI passenger name");
             var loc = L(Sel.OtherSCIPassengerDropdown);
             await WaitVisibleAsync(loc);
+            await loc.ScrollIntoViewIfNeededAsync();
             await loc.ClickAsync();
         }
 
@@ -373,6 +397,7 @@ namespace GlideGoWeb.PageObjects
             ExtentReporting.LogInfo("Click on the checkbox of heavy equipment");
             var checkbox = L(Sel.HeavyEquipmentCheckbox);
             await WaitVisibleAsync(checkbox);
+            await checkbox.ScrollIntoViewIfNeededAsync();
             await checkbox.ClickAsync();
         }
 
@@ -381,6 +406,7 @@ namespace GlideGoWeb.PageObjects
             ExtentReporting.LogInfo($"Enter the description of Heavy Equipment: {description}");
             var loc = L(Sel.HeavyEquipmentDescriptionInput);
             await WaitVisibleAsync(loc);
+            await loc.ScrollIntoViewIfNeededAsync();
             await loc.FillAsync(description);
         }
 
@@ -389,6 +415,7 @@ namespace GlideGoWeb.PageObjects
             ExtentReporting.LogInfo($"Enter the estimate weight: {weight}");
             var loc = L(Sel.EstimateWeightInput);
             await WaitVisibleAsync(loc);
+            await loc.ScrollIntoViewIfNeededAsync();
             await loc.FillAsync(weight);
         }
 
@@ -397,6 +424,7 @@ namespace GlideGoWeb.PageObjects
             ExtentReporting.LogInfo($"Select weight unit: {unit}");
             var dropdown = L(Sel.WeightUnitDropdownText);
             await WaitVisibleAsync(dropdown);
+            await dropdown.ScrollIntoViewIfNeededAsync();
             await dropdown.ClickAsync();
 
             if (unit?.Trim().ToLower() == "pound")
@@ -418,6 +446,7 @@ namespace GlideGoWeb.PageObjects
             ExtentReporting.LogInfo($"Enter the Additional Comment: {comment}");
             var loc = L(Sel.AdditionalCommentTextarea);
             await WaitVisibleAsync(loc);
+            await loc.ScrollIntoViewIfNeededAsync();
             await loc.FillAsync(comment);
         }
 
@@ -426,6 +455,7 @@ namespace GlideGoWeb.PageObjects
             ExtentReporting.LogInfo("Click on the next button");
             var btn = L(Sel.NextButton);
             await WaitVisibleAsync(btn);
+            await btn.ScrollIntoViewIfNeededAsync();
             await btn.ClickAsync();
         }
 
@@ -434,6 +464,7 @@ namespace GlideGoWeb.PageObjects
             ExtentReporting.LogInfo("Click on the cancel button");
             var btn = L(Sel.CancelButton);
             await WaitVisibleAsync(btn);
+            await btn.ScrollIntoViewIfNeededAsync();
             await btn.ClickAsync();
         }
 

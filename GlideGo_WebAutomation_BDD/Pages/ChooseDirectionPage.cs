@@ -2,6 +2,7 @@
 using ProjectUtilityReporting;
 using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using System.Text;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
@@ -16,9 +17,9 @@ namespace GlideGoWeb.PageObjects
         private const string StartingPointInput = "//input[@placeholder='Choose starting point...']";
         private const string DestinationPointInput = "//input[@placeholder='Choose destination...']";
         private const string AddDestinationButton = "//span[normalize-space()='Add destination']";
-        private const string SendButton = "//div[@class='routebar-rf-tab-footer-button routebar-rf-tab-footer-button-send False']";
+        private const string NextButton = "//div[@class='routebar-rf-tab-footer-button routebar-rf-tab-footer-button-send False']";
         private const string FoundLocationButton = "//div[@class='routebar-rf-location-list']//div[2]//span[1]//span[1]";
-
+        private const string MapLodingLoc = "div.leaflet-tile-container img.leaflet-tile";
         public ChooseDirectionPage(IPage page)
         {
             this.page = page;
@@ -29,7 +30,7 @@ namespace GlideGoWeb.PageObjects
         {
             await page.WaitForSelectorAsync(locator, new PageWaitForSelectorOptions
             {
-                Timeout = 5000,
+                Timeout = 10000,
                 State = WaitForSelectorState.Visible
             });
             return page.Locator(locator);
@@ -39,6 +40,7 @@ namespace GlideGoWeb.PageObjects
         {
             ExtentReporting.LogInfo($"Choose Starting Point: {location}");
             await (await WaitForVisibleAsync(StartingPointInput)).FillAsync(location);
+            
          
         }
 
@@ -53,20 +55,25 @@ namespace GlideGoWeb.PageObjects
             ExtentReporting.LogInfo($"Choose Additional Point: {location}");
             await (await WaitForVisibleAsync(AddDestinationButton)).ClickAsync();
             await (await WaitForVisibleAsync(DestinationPointInput)).FillAsync(location);
+        
         }
 
         public async Task ClickOnSendButton()
         {
             ExtentReporting.LogInfo("Click on the send button");
-            await (await WaitForVisibleAsync(SendButton)).ClickAsync();
+            await Task.Delay(1000);
+            await (await WaitForVisibleAsync(NextButton)).ClickAsync();
         }
 
         public async Task ClickOnFoundLocation()
         {
             ExtentReporting.LogInfo("Click on found location");
+
             await (await WaitForVisibleAsync(FoundLocationButton)).ClickAsync();
-            await page.Locator("div.leaflet-tile-container img.leaflet-tile").First
-            .WaitForAsync(new LocatorWaitForOptions { State = WaitForSelectorState.Visible });
+            await page.WaitForSelectorAsync(MapLodingLoc,
+                            new() { State = WaitForSelectorState.Visible, Timeout = 10000 });
+
+            await Task.Delay(1000);
 
         }
 

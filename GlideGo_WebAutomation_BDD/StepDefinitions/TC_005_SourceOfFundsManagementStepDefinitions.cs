@@ -1,5 +1,7 @@
 using GlideGo_WebAutomation_BDD.Drivers;
+using GlideGo_WebAutomation_BDD.Pages;
 using GlideGoWeb.PageObjects;
+using NUnit.Framework;
 using ProjectUtilityExcel;
 using ProjectUtilityReporting;
 using Reqnroll;
@@ -16,6 +18,7 @@ namespace GlideGo_WebAutomation_BDD.StepDefinitions
         private string username;
         private string password;
         private string sofName;
+        private int arrayLength;
         private string[] narrative;
         private string[] accountCode;
         private string[] costCenter;
@@ -31,6 +34,8 @@ namespace GlideGo_WebAutomation_BDD.StepDefinitions
         private LoginPage login = default!;
         private PreLoginPage pre = default!;
         private Dashboard dash = default!;
+        private SOFManagementPage sofManage = default!;
+        private SOFFormPage sofForm = default!;
 
         public TC_005_SourceOfFundsManagementStepDefinitions()
         {
@@ -39,11 +44,11 @@ namespace GlideGo_WebAutomation_BDD.StepDefinitions
             string row = ExcelReaderUtil.ReadData(1, "ConfigRow") ?? string.Empty;
 
             string[] rowArray = row.Split('-');
-            int arrayLenght = rowArray.Length;
+            int arrayLen = rowArray.Length;
 
-            int[] configRowArray = new int[arrayLenght];
+            int[] configRowArray = new int[arrayLen];
 
-            for (int i = 0; i < arrayLenght; i++)
+            for (int i = 0; i < arrayLen; i++)
             {
                 rowArray[i] = rowArray[i].Trim();
                 configRowArray[i] = Convert.ToInt32(rowArray[i]);
@@ -51,18 +56,19 @@ namespace GlideGo_WebAutomation_BDD.StepDefinitions
 
             int firstConfigRow = configRowArray[0];
             int lastConfigRow = configRowArray[configRowArray.Length - 1];
+            arrayLength = lastConfigRow;
+         
+            narrative = new string[arrayLength];
+            accountCode = new string[arrayLength];
+            costCenter = new string[arrayLength];
+            project = new string[arrayLength];
+            sof = new string[arrayLength];
+            drc = new string[arrayLength];
+            activity = new string[arrayLength];
+            budgetHolders = new string[arrayLength];
+            percentage = new string[arrayLength];
 
-            narrative = new string[lastConfigRow];
-            accountCode = new string[lastConfigRow];
-            costCenter = new string[lastConfigRow];
-            project = new string[lastConfigRow];
-            sof = new string[lastConfigRow];
-            drc = new string[lastConfigRow];
-            activity = new string[lastConfigRow];
-            budgetHolders = new string[lastConfigRow];
-            percentage = new string[lastConfigRow];
-
-            for (int i=0; i<lastConfigRow; i++)
+            for (int i=0; i<arrayLength; i++)
             {
 
                 narrative[i] = ExcelReaderUtil.ReadData(i + firstConfigRow, "Narrative") ?? string.Empty;
@@ -87,100 +93,132 @@ namespace GlideGo_WebAutomation_BDD.StepDefinitions
 
         }
 
-
-        [Given("Open the application and goto the url")]
-        public async Task GivenOpenTheApplicationAndGotoTheUrl()
+        [Given("Open the application and goto the url for sof management")]
+        public async Task GivenOpenTheApplicationAndGotoTheUrlForSofManagement()
         {
             page = await factory.InitBrowser(browserName);
             login = new LoginPage(page);
             pre = new PreLoginPage(page);
             dash = new Dashboard(page);
+            sofManage = new SOFManagementPage(page);
+            sofForm = new SOFFormPage(page);
 
             await page.GotoAsync(url);
 
             ExtentReporting.LogInfo($"Goto the url:{url}");
         }
 
+
         [Given("the user navigates to the Source of Funds creation form")]
-        public void GivenTheUserNavigatesToTheSourceOfFundsCreationForm()
+        public async Task GivenTheUserNavigatesToTheSourceOfFundsCreationForm()
         {
-            throw new PendingStepException();
+            await pre.ClickOnContinueAsGuest();
+            await login.EnterUsername(username);
+            await login.EnterPassword(password);
+            await login.ClickOnLoginButton();
+
+            await dash.ClickOnSOFManagement();
+            await sofManage.ClickOnAddSOFButton();
+     
+
         }
 
         [When("the user fills out all required fields")]
-        public void WhenTheUserFillsOutAllRequiredFields()
+        public async Task WhenTheUserFillsOutAllRequiredFields()
         {
-            throw new PendingStepException();
+
+            for (int i = 0; i < arrayLength; i++)
+            {
+                await sofForm.EnterNarrative(narrative[i]);
+                await sofForm.EnterAccountCode(accountCode[i]);
+                await sofForm.SelectCostCenter(costCenter[i]);
+                await sofForm.SelectProject(project[i]);
+                await sofForm.SelectSOF(sof[i]);
+                await sofForm.SelectDRC(drc[i]);
+                await sofForm.SelectActivity(activity[i]);
+                await sofForm.SelectBudgetHolder(budgetHolders[i]);
+                await sofForm.EnterPercentage(percentage[i]);
+                await sofForm.ClickOnAddSOFButton();
+
+            }
+
+            await page.EvaluateAsync("window.scrollBy(0, 500)");
+
+            await sofForm.EnterSOFName(sofName);
+
+
         }
 
         [When("clicks the Save button")]
-        public void WhenClicksTheSaveButton()
+        public async Task WhenClicksTheSaveButton()
         {
-            throw new PendingStepException();
+            
+            await sofForm.ClickOnSaveButton();
         }
 
         [Then("displays a confirmation message")]
-        public void ThenDisplaysAConfirmationMessage()
+        public async Task ThenDisplaysAConfirmationMessage()
         {
-            throw new PendingStepException();
+            bool actualResult = await sofManage.IsSOFSuccessfullyCreated();
+            Assert.That(actualResult, Is.True);
         }
 
         [Given("the user has an existing Source of Funds record")]
-        public void GivenTheUserHasAnExistingSourceOfFundsRecord()
+        public async Task GivenTheUserHasAnExistingSourceOfFundsRecord()
         {
             throw new PendingStepException();
         }
 
         [When("the user selects the record")]
-        public void WhenTheUserSelectsTheRecord()
+        public async Task WhenTheUserSelectsTheRecord()
         {
             throw new PendingStepException();
         }
 
         [When("clicks the Delete button")]
-        public void WhenClicksTheDeleteButton()
+        public async Task WhenClicksTheDeleteButton()
         {
             throw new PendingStepException();
         }
 
         [Then("displays a deletion confirmation message")]
-        public void ThenDisplaysADeletionConfirmationMessage()
+        public async Task ThenDisplaysADeletionConfirmationMessage()
         {
             throw new PendingStepException();
         }
 
         [When("updates the required fields")]
-        public void WhenUpdatesTheRequiredFields()
+        public async Task WhenUpdatesTheRequiredFields()
         {
             throw new PendingStepException();
         }
 
         [Then("displays an update confirmation message")]
-        public void ThenDisplaysAnUpdateConfirmationMessage()
+        public async Task ThenDisplaysAnUpdateConfirmationMessage()
         {
             throw new PendingStepException();
         }
 
         [Given("the user is on the Source of Funds creation form")]
-        public void GivenTheUserIsOnTheSourceOfFundsCreationForm()
+        public async Task GivenTheUserIsOnTheSourceOfFundsCreationForm()
         {
             throw new PendingStepException();
         }
 
         [When("the user enters data into the form")]
-        public void WhenTheUserEntersDataIntoTheForm()
+        public async Task WhenTheUserEntersDataIntoTheForm()
         {
             throw new PendingStepException();
         }
 
         [When("clicks the Cancel button")]
-        public void WhenClicksTheCancelButton()
+        public async Task WhenClicksTheCancelButton()
         {
             throw new PendingStepException();
         }
 
         [Then("the system does not save any entered data")]
-        public void ThenTheSystemDoesNotSaveAnyEnteredData()
+        public async Task ThenTheSystemDoesNotSaveAnyEnteredData()
         {
             throw new PendingStepException();
         }

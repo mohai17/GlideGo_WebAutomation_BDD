@@ -4,7 +4,7 @@ Feature: TC_005_Source of Funds Management
   So that I can add, edit, delete, or cancel SOF records effectively
 
   Background: 
-    Given Open the application and goto the url
+    Given Open the application and goto the url for sof management
 
   Scenario: TS_001_Successfully add a new Source of Funds
     Given the user navigates to the Source of Funds creation form

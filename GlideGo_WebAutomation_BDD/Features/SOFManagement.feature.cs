@@ -109,7 +109,7 @@ namespace GlideGo_WebAutomation_BDD.Features
 #line 6
   #line hidden
 #line 7
-    await testRunner.GivenAsync("Open the application and goto the url", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
+    await testRunner.GivenAsync("Open the application and goto the url for sof management", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
         }
         
