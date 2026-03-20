@@ -18,6 +18,8 @@ namespace GlideGo_WebAutomation_BDD.StepDefinitions
         private string username;
         private string password;
         private string sofName;
+        private string delSofName;
+        private string editSofName;
         private int arrayLength;
         private string[] narrative;
         private string[] accountCode;
@@ -90,6 +92,8 @@ namespace GlideGo_WebAutomation_BDD.StepDefinitions
             username = ExcelReaderUtil.ReadData(rowNumber, "Username") ?? string.Empty;
             password = ExcelReaderUtil.ReadData(rowNumber, "Password") ?? string.Empty;
             sofName = ExcelReaderUtil.ReadData(rowNumber, "SOFName") ?? string.Empty;
+            delSofName = ExcelReaderUtil.ReadData(rowNumber, "SOFNameForDeletion") ?? string.Empty;
+            editSofName = ExcelReaderUtil.ReadData(rowNumber, "SOFNameForEdit") ?? string.Empty;
 
         }
 
@@ -151,8 +155,7 @@ namespace GlideGo_WebAutomation_BDD.StepDefinitions
 
         [When("clicks the Save button")]
         public async Task WhenClicksTheSaveButton()
-        {
-            
+        {          
             await sofForm.ClickOnSaveButton();
         }
 
@@ -166,23 +169,34 @@ namespace GlideGo_WebAutomation_BDD.StepDefinitions
         [Given("the user has an existing Source of Funds record")]
         public async Task GivenTheUserHasAnExistingSourceOfFundsRecord()
         {
-            throw new PendingStepException();
+            await pre.ClickOnContinueAsGuest();
+            await login.EnterUsername(username);
+            await login.EnterPassword(password);
+            await login.ClickOnLoginButton();
+            await dash.ClickOnSOFManagement();    
         }
 
-        [When("the user selects the record")]
-        public async Task WhenTheUserSelectsTheRecord()
+        [When("the user clicks the Delete button of specific SOF Record")]
+        public async Task WhenTheUserClicksTheDeleteButtonOfSpecificSOFRecord()
         {
-            throw new PendingStepException();
+            await sofManage.ClickOnDeleteButton(delSofName);
         }
 
-        [When("clicks the Delete button")]
-        public async Task WhenClicksTheDeleteButton()
+        [When("the user clicks the confirmation button of the pop-up")]
+        public async Task WhenTheUserClicksTheConfirmationButtonOfThePop_Up()
         {
-            throw new PendingStepException();
+            await sofManage.ClickOnDeleteConfirmation();
         }
 
         [Then("displays a deletion confirmation message")]
         public async Task ThenDisplaysADeletionConfirmationMessage()
+        {
+            bool actualResult = await sofManage.IsSuccessfullyDeleted();
+            Assert.That(actualResult, Is.True);
+        }
+
+        [When("the user clicks the Edit button of specific SOF Record")]
+        public async Task WhenTheUserClicksTheEditButtonOfSpecificSOFRecord()
         {
             throw new PendingStepException();
         }
@@ -199,29 +213,8 @@ namespace GlideGo_WebAutomation_BDD.StepDefinitions
             throw new PendingStepException();
         }
 
-        [Given("the user is on the Source of Funds creation form")]
-        public async Task GivenTheUserIsOnTheSourceOfFundsCreationForm()
-        {
-            throw new PendingStepException();
-        }
 
-        [When("the user enters data into the form")]
-        public async Task WhenTheUserEntersDataIntoTheForm()
-        {
-            throw new PendingStepException();
-        }
 
-        [When("clicks the Cancel button")]
-        public async Task WhenClicksTheCancelButton()
-        {
-            throw new PendingStepException();
-        }
-
-        [Then("the system does not save any entered data")]
-        public async Task ThenTheSystemDoesNotSaveAnyEnteredData()
-        {
-            throw new PendingStepException();
-        }
 
     }
 }

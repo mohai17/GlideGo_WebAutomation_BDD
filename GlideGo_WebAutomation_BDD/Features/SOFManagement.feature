@@ -14,20 +14,15 @@ Feature: TC_005_Source of Funds Management
 
   Scenario: TS_002_Delete an existing Source of Funds
     Given the user has an existing Source of Funds record
-    When the user selects the record
-    And clicks the Delete button
+    When the user clicks the Delete button of specific SOF Record
+    And the user clicks the confirmation button of the pop-up
     Then displays a deletion confirmation message
 
   Scenario: TS_003_Edit an existing Source of Funds
     Given the user has an existing Source of Funds record
-    When the user selects the record
+    When the user clicks the Edit button of specific SOF Record
     And updates the required fields
     And clicks the Save button
     Then displays an update confirmation message
 
-  Scenario: TS_004_Cancel Source of Funds creation
-    Given the user is on the Source of Funds creation form
-    When the user enters data into the form
-    And clicks the Cancel button
-    Then the system does not save any entered data
     

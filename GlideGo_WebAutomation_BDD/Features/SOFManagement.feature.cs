@@ -115,7 +115,7 @@ namespace GlideGo_WebAutomation_BDD.Features
         
         private static global::Reqnroll.Formatters.RuntimeSupport.FeatureLevelCucumberMessages InitializeCucumberMessages()
         {
-            return new global::Reqnroll.Formatters.RuntimeSupport.FeatureLevelCucumberMessages("Features/SOFManagement.feature.ndjson", 6);
+            return new global::Reqnroll.Formatters.RuntimeSupport.FeatureLevelCucumberMessages("Features/SOFManagement.feature.ndjson", 5);
         }
         
         [global::NUnit.Framework.TestAttribute()]
@@ -184,10 +184,10 @@ namespace GlideGo_WebAutomation_BDD.Features
     await testRunner.GivenAsync("the user has an existing Source of Funds record", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
 #line 17
-    await testRunner.WhenAsync("the user selects the record", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+    await testRunner.WhenAsync("the user clicks the Delete button of specific SOF Record", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
 #line 18
-    await testRunner.AndAsync("clicks the Delete button", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+    await testRunner.AndAsync("the user clicks the confirmation button of the pop-up", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
 #line 19
     await testRunner.ThenAsync("displays a deletion confirmation message", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
@@ -223,7 +223,7 @@ namespace GlideGo_WebAutomation_BDD.Features
     await testRunner.GivenAsync("the user has an existing Source of Funds record", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
 #line 23
-    await testRunner.WhenAsync("the user selects the record", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+    await testRunner.WhenAsync("the user clicks the Edit button of specific SOF Record", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
 #line 24
     await testRunner.AndAsync("updates the required fields", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
@@ -233,45 +233,6 @@ namespace GlideGo_WebAutomation_BDD.Features
 #line hidden
 #line 26
     await testRunner.ThenAsync("displays an update confirmation message", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
-#line hidden
-            }
-            await this.ScenarioCleanupAsync();
-        }
-        
-        [global::NUnit.Framework.TestAttribute()]
-        [global::NUnit.Framework.DescriptionAttribute("TS_004_Cancel Source of Funds creation")]
-        public async global::System.Threading.Tasks.Task TS_004_CancelSourceOfFundsCreation()
-        {
-            string[] tagsOfScenario = ((string[])(null));
-            global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
-            string pickleIndex = "3";
-            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("TS_004_Cancel Source of Funds creation", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
-            string[] tagsOfRule = ((string[])(null));
-            global::Reqnroll.RuleInfo ruleInfo = null;
-#line 28
-  this.ScenarioInitialize(scenarioInfo, ruleInfo);
-#line hidden
-            if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
-            {
-                await testRunner.SkipScenarioAsync();
-            }
-            else
-            {
-                await this.ScenarioStartAsync();
-#line 6
-  await this.FeatureBackgroundAsync();
-#line hidden
-#line 29
-    await testRunner.GivenAsync("the user is on the Source of Funds creation form", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
-#line hidden
-#line 30
-    await testRunner.WhenAsync("the user enters data into the form", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
-#line hidden
-#line 31
-    await testRunner.AndAsync("clicks the Cancel button", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
-#line hidden
-#line 32
-    await testRunner.ThenAsync("the system does not save any entered data", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
