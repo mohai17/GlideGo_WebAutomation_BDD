@@ -5,7 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
-	
+
   <ItemGroup>
     <PackageReference Include="ExcelDataReader" Version="3.8.0" />
     <PackageReference Include="ExcelDataReader.DataSet" Version="3.8.0" />
@@ -23,7 +23,6 @@
 
   <ItemGroup>
     <Folder Include="Resources\TestData\" />
-    <Folder Include="Support\" />
   </ItemGroup>
 
 </Project>

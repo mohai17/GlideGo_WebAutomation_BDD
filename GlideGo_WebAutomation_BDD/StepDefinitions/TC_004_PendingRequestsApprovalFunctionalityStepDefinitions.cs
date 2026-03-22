@@ -1,3 +1,4 @@
+using AventStack.ExtentReports.Gherkin.Model;
 using GlideGo_WebAutomation_BDD.Drivers;
 using GlideGoWeb.PageObjects;
 using Microsoft.Playwright;
@@ -14,13 +15,13 @@ namespace GlideGo_WebAutomation_BDD.StepDefinitions
     public class TC_004_PendingRequestsApprovalFunctionalityStepDefinitions:Setup
     {
         private int rowNumber;
-        private string[] budgetHolderUsernames;
-        private string[] budgetHoldersPasswords;
-        private string supervisorsUsername;
-        private string supervisorsPassword;
-        private string tripId;
-        private string[] BudgetholderReason;
-        private string SupervisorReason;
+        private string[] budgetHolderUsernames = default!;
+        private string[] budgetHoldersPasswords = default!;
+        private string supervisorsUsername = default!;
+        private string supervisorsPassword = default!;
+        private string tripId = default!;
+        private string[] BudgetholderReason = default!;
+        private string SupervisorReason = default!;
 
         private bool actualResult = true;
 
@@ -30,17 +31,20 @@ namespace GlideGo_WebAutomation_BDD.StepDefinitions
         private ReviewApprovePage review = default!;
         private TripApprovalPage approval = default!;
 
-        public TC_004_PendingRequestsApprovalFunctionalityStepDefinitions()
-        {
+        private string TestScenarioId = default!;
 
-            ExcelReaderUtil.PopulateInCollection(excelpath, "TripApprovalData");
+
+        private void CallForData(string DataSheet)
+        {
+            Console.WriteLine(DataSheet);
+            ExcelReaderUtil.PopulateInCollection(excelpath, DataSheet);
 
             string row = ExcelReaderUtil.ReadData(1, "ConfigRow") ?? string.Empty;
 
             string[] rowArray = row.Split('-');
             int arrayLenght = rowArray.Length;
 
-            int[] configRowArray = new int[arrayLenght] ;
+            int[] configRowArray = new int[arrayLenght];
 
             for (int i = 0; i < arrayLenght; i++)
             {
@@ -56,9 +60,9 @@ namespace GlideGo_WebAutomation_BDD.StepDefinitions
             budgetHolderUsernames = new string[lastConfigRow];
             budgetHoldersPasswords = new string[lastConfigRow];
             BudgetholderReason = new string[lastConfigRow];
-           
 
-            for(int i=0; i<lastConfigRow; i++)
+
+            for (int i = 0; i < lastConfigRow; i++)
             {
                 budgetHolderUsernames[i] = ExcelReaderUtil.ReadData(i + firstConfigRow, "BudgetHolderUsername") ?? string.Empty;
                 budgetHoldersPasswords[i] = ExcelReaderUtil.ReadData(i + firstConfigRow, "BudgetHolderPassword") ?? string.Empty;
@@ -66,16 +70,19 @@ namespace GlideGo_WebAutomation_BDD.StepDefinitions
             }
 
             tripId = ExcelReaderUtil.ReadData(rowNumber, "TripId") ?? string.Empty;
-            
+
             supervisorsUsername = ExcelReaderUtil.ReadData(rowNumber, "SupervisorUsername") ?? string.Empty;
             supervisorsPassword = ExcelReaderUtil.ReadData(rowNumber, "SupervisorPassword") ?? string.Empty;
             SupervisorReason = ExcelReaderUtil.ReadData(rowNumber, "SupervisorReason") ?? string.Empty;
-
         }
 
-        [Given("open the application")]
-        public async Task GivenAPendingRequestExists()
+        [Given("Open the Application and Get Test Data for {string}")]
+        public async Task GivenOpenTheApplicationAndGetTestDataForTS_(string ScenarioId)
         {
+            CallForData($"TripApprovalData_{ScenarioId}");
+
+            TestScenarioId = ScenarioId;
+
             page = await factory.InitBrowser(browserName);
 
             pre = new PreLoginPage(page);
@@ -87,10 +94,8 @@ namespace GlideGo_WebAutomation_BDD.StepDefinitions
             await page.GotoAsync(url);
 
             ExtentReporting.LogInfo($"Goto the url:{url}");
-
         }
 
-        
 
         [When("the budget holder accepts the pending request")]
         public async Task WhenTheBudgetHolderAcceptsThePendingRequest()
@@ -108,15 +113,21 @@ namespace GlideGo_WebAutomation_BDD.StepDefinitions
                 await review.ClickOnTripDetails(tripId);
                 await approval.ClickOnApproveButton();
 
-                bool Result = await approval.IsSuccessfullyApproved();
+                bool Result1 = await approval.IsSuccessfullyApproved();
                 ExtentReporting.LogScreenshot("Approval", await ScreenshotHelper.TakeScreenshotAsync(page, "Element"));
+
                 await approval.ClickOnTripApprovalList();
+
+                bool Result2 = await approval.IsSuccessfullyDataSaved();
+                ExtentReporting.LogScreenshot("Data Saved", await ScreenshotHelper.TakeScreenshotAsync(page, "Element"));
+
+                actualResult = actualResult && Result1 && Result2;
+
+       
                 await dash.ClickOnProfileIcon();
                 await dash.ClickOnLogoutButton();
                 await page.WaitForLoadStateAsync(LoadState.DOMContentLoaded);
-                ExtentReporting.LogScreenshot("Logout", await ScreenshotHelper.TakeScreenshotAsync(page, "Element"));
 
-                actualResult = actualResult && Result;
 
             }
 
@@ -153,13 +164,6 @@ namespace GlideGo_WebAutomation_BDD.StepDefinitions
                 ExtentReporting.LogScreenshot("Data Saved", await ScreenshotHelper.TakeScreenshotAsync(page, "Element"));
 
                 actualResult = actualResult && Result1 && Result2;
-                
-    
-                await dash.ClickOnProfileIcon();
-                await dash.ClickOnLogoutButton();
-                await page.WaitForLoadStateAsync(LoadState.DOMContentLoaded);
-                ExtentReporting.LogScreenshot("Logout", await ScreenshotHelper.TakeScreenshotAsync(page, "Element"));
-
 
 
         }
@@ -169,8 +173,6 @@ namespace GlideGo_WebAutomation_BDD.StepDefinitions
         {
             Assert.That(actualResult, Is.True);
         }
-
-
 
         [When("the budget holder rejects the pending request")]
         public async Task WhenTheBudgetHolderRejectsThePendingRequest()
@@ -204,16 +206,13 @@ namespace GlideGo_WebAutomation_BDD.StepDefinitions
 
                     await approval.ClickOnApproveButton();
 
-                    bool Result = await approval.IsSuccessfullyApproved();
+                    bool Result1 = await approval.IsSuccessfullyApproved();
                     ExtentReporting.LogScreenshot("Approval", await ScreenshotHelper.TakeScreenshotAsync(page, "Element"));
-                    if (Result)
-                    {
-                        await approval.ClickOnTripApprovalList();
-                        await dash.ClickOnProfileIcon();
-                        await dash.ClickOnLogoutButton();
-                        await page.WaitForLoadStateAsync(LoadState.DOMContentLoaded);
-                        ExtentReporting.LogScreenshot("Logout", await ScreenshotHelper.TakeScreenshotAsync(page, "Element"));
-                    }
+
+                    await approval.ClickOnTripApprovalList();
+
+                    bool Result2 = await approval.IsSuccessfullyDataSaved();
+                    ExtentReporting.LogScreenshot("Data Saved", await ScreenshotHelper.TakeScreenshotAsync(page, "Element"));
 
                 }
 
@@ -247,15 +246,18 @@ namespace GlideGo_WebAutomation_BDD.StepDefinitions
         [Then("the system updates the request status to Rejected")]
         public async Task ThenTheSystemUpdatesTheRequestStatusToRejected()
         {
-
             Assert.That(actualResult, Is.True);
         }
 
 
-
-
-
-
+        [Then("Logout from supervisor account")]
+        public async Task ThenLogoutFromSupervisorAccount()
+        {
+ 
+            await dash.ClickOnProfileIcon();
+            await dash.ClickOnLogoutButton();
+            await page.WaitForLoadStateAsync(LoadState.DOMContentLoaded);
+        }
 
 
     }

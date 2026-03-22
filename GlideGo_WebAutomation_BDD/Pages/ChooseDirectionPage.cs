@@ -61,7 +61,7 @@ namespace GlideGoWeb.PageObjects
         public async Task ClickOnSendButton()
         {
             ExtentReporting.LogInfo("Click on the send button");
-            await Task.Delay(1000);
+            await Task.Delay(4000);
             await (await WaitForVisibleAsync(NextButton)).ClickAsync();
         }
 

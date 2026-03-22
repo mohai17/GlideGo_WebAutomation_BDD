@@ -195,23 +195,6 @@ namespace GlideGo_WebAutomation_BDD.StepDefinitions
             Assert.That(actualResult, Is.True);
         }
 
-        [When("the user clicks the Edit button of specific SOF Record")]
-        public async Task WhenTheUserClicksTheEditButtonOfSpecificSOFRecord()
-        {
-            throw new PendingStepException();
-        }
-
-        [When("updates the required fields")]
-        public async Task WhenUpdatesTheRequiredFields()
-        {
-            throw new PendingStepException();
-        }
-
-        [Then("displays an update confirmation message")]
-        public async Task ThenDisplaysAnUpdateConfirmationMessage()
-        {
-            throw new PendingStepException();
-        }
 
 
 

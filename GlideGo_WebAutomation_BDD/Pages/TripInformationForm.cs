@@ -395,6 +395,7 @@ namespace GlideGoWeb.PageObjects
         public async Task CheckHeaveyEquipment()
         {
             ExtentReporting.LogInfo("Click on the checkbox of heavy equipment");
+            await page.EvaluateAsync("window.scrollBy(0, 500)");
             var checkbox = L(Sel.HeavyEquipmentCheckbox);
             await WaitVisibleAsync(checkbox);
             await checkbox.ScrollIntoViewIfNeededAsync();
