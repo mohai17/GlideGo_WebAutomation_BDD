@@ -250,15 +250,6 @@ namespace GlideGo_WebAutomation_BDD.StepDefinitions
         }
 
 
-        [Then("Logout from supervisor account")]
-        public async Task ThenLogoutFromSupervisorAccount()
-        {
- 
-            await dash.ClickOnProfileIcon();
-            await dash.ClickOnLogoutButton();
-            await page.WaitForLoadStateAsync(LoadState.DOMContentLoaded);
-        }
-
 
     }
 }
