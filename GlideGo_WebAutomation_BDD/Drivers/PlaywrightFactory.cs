@@ -134,7 +134,6 @@ namespace BDD_Project_Playwright_DotNet.Drivers
                         break;
                 }
 
-                await page.WaitForLoadStateAsync(LoadState.DOMContentLoaded);
                 ExtentReporting.LogScreenshot("Ending Test",await ScreenshotHelper.TakeScreenshotAsync(page, "Element"));
             }
 

@@ -127,6 +127,7 @@ namespace GlideGo_WebAutomation_BDD.StepDefinitions
                 await dash.ClickOnProfileIcon();
                 await dash.ClickOnLogoutButton();
                 await page.WaitForLoadStateAsync(LoadState.DOMContentLoaded);
+                await pre.IsItPreLoginPage();
 
 
             }
@@ -165,6 +166,9 @@ namespace GlideGo_WebAutomation_BDD.StepDefinitions
 
                 actualResult = actualResult && Result1 && Result2;
 
+                await dash.ClickOnProfileIcon();
+                await dash.ClickOnLogoutButton();
+                await page.WaitForLoadStateAsync(LoadState.DOMContentLoaded);
 
         }
 
@@ -214,6 +218,11 @@ namespace GlideGo_WebAutomation_BDD.StepDefinitions
                     bool Result2 = await approval.IsSuccessfullyDataSaved();
                     ExtentReporting.LogScreenshot("Data Saved", await ScreenshotHelper.TakeScreenshotAsync(page, "Element"));
 
+                    await dash.ClickOnProfileIcon();
+                    await dash.ClickOnLogoutButton();
+                    await page.WaitForLoadStateAsync(LoadState.DOMContentLoaded);
+
+                    await pre.IsItPreLoginPage();
                 }
 
 
