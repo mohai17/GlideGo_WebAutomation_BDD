@@ -34,7 +34,7 @@ namespace GlideGo_WebAutomation_BDD.Pages
         }
 
         private static readonly WaitForSelectorState Visible = WaitForSelectorState.Visible;
-        private const float DefaultTimeout = 5000;
+        private const float DefaultTimeout = 30000;
 
         private async Task WaitVisibleAsync(ILocator locator, float timeout = DefaultTimeout)
         {

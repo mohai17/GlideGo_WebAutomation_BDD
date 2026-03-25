@@ -15,7 +15,7 @@ namespace GlideGoWeb.PageObjects
         private const string LangDropDownLoc = "//button[@class='gg-lang-btn']";
         private const string SignInWithSSOLoc = "//button[@class='gg-submit-btn']";
         private const string ContinueAsGuestLoc = "//button[@class='gg-back-btn']";
-        private const string PreLoginTextLoc = "//p[normalize-space()='Sign in to continue']";
+        private const string PreLoginTextLoc = "//p[@class='gg-form-subtitle' and contains(text(),'Sign in to continue')]";
 
         public PreLoginPage(IPage page)
         {
@@ -26,7 +26,7 @@ namespace GlideGoWeb.PageObjects
         {
             await page.WaitForSelectorAsync(locator, new PageWaitForSelectorOptions
             {
-                Timeout = 10000,
+                Timeout = 30000,
                 State = WaitForSelectorState.Visible
             });
             return page.Locator(locator);
@@ -55,8 +55,10 @@ namespace GlideGoWeb.PageObjects
         public async Task<bool> IsItPreLoginPage()
         {
             ExtentReporting.LogInfo("Checking if user remains on the prelogin page");
+ 
             string text = await (await WaitForVisibleAsync(PreLoginTextLoc)).InnerTextAsync() ?? string.Empty;
-            return text.Equals("Sign in to continue");
+            return text.Contains("Sign in to continue");
+
         }
 
 

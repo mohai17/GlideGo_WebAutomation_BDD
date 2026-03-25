@@ -92,7 +92,10 @@ namespace BDD_Project_Playwright_DotNet.Drivers
                 Permissions = new[] { "geolocation" }
             });
 
+
             page = await context.NewPageAsync();
+
+            await context.ClearCookiesAsync();
 
             return page;
 

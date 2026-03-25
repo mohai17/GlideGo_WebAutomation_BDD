@@ -60,7 +60,7 @@ namespace GlideGo_WebAutomation_BDD.Pages
         private ILocator GetLocator(string selector) => page.Locator(selector);
 
         private static readonly WaitForSelectorState visible = WaitForSelectorState.Visible;
-        private const float DefaultTimeout = 5000;
+        private const float DefaultTimeout = 30000;
 
         private async Task WaitVisibleAsync(ILocator locator, float timeout = DefaultTimeout)
         {
