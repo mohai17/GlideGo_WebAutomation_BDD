@@ -165,7 +165,7 @@ namespace GlideGo_WebAutomation_BDD.StepDefinitions
 
 
         [When("I have provided other essential information")]
-        public async Task GivenIHaveProvidedOtherEssentialInformation()
+        public async Task WhenIHaveProvidedOtherEssentialInformation()
         {
 
             await trip.EnterPurposeOfTravel(purpose);

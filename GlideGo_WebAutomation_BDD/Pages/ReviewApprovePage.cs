@@ -30,7 +30,7 @@ namespace GlideGoWeb.PageObjects
         {
             ExtentReporting.LogInfo($"Click on trip details for Trip ID: {tripId}");
 
-            await page.EvaluateAsync("document.body.style.zoom = '70%'");
+            //await page.EvaluateAsync("document.body.style.zoom = '70%'");
 
             string tripDetailsLoc = $"//span[normalize-space()='{tripId}']/ancestor::div[2]//a[normalize-space()='View Details']";
 
