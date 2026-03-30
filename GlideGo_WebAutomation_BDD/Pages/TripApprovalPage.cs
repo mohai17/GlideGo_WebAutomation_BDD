@@ -13,6 +13,7 @@ namespace GlideGoWeb.PageObjects
 
 
         private const string ApprovalButtonLoc = "//span[normalize-space()='Approve']";
+        private const string ApprovalConfirmButtonLoc = "//div[@class='dialog-rf-confirm' and normalize-space()='Yes, delete it!']";
         private const string RejectButtonLoc = "//span[normalize-space()='Reject']";
         private const string TripApprovalListLoc = "//div[@class='modal-rf-button']";
         private const string ApprovalSuccessLoc = "//div[normalize-space()='Trip Request Approved']";
@@ -93,6 +94,12 @@ namespace GlideGoWeb.PageObjects
             return await (await WaitForVisibleAsync(RejectionToastLoc)).IsVisibleAsync();
         }
 
+        public async Task ClickOnConfirmApprovalButton()
+        {
+            ExtentReporting.LogInfo("Click on confirm approval button");
+            await (await WaitForVisibleAsync(ApprovalConfirmButtonLoc)).ClickAsync();
+
+        }
 
     }
 }

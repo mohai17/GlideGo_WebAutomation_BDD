@@ -112,9 +112,11 @@ namespace GlideGo_WebAutomation_BDD.Features
         [global::NUnit.Framework.TestAttribute()]
         [global::NUnit.Framework.DescriptionAttribute("TS_001_Budget Holder and Supervisor accept a pending request when flow is budget " +
             "holder to supervisor")]
+        [global::NUnit.Framework.IgnoreAttribute("Ignored scenario")]
         public async global::System.Threading.Tasks.Task TS_001_BudgetHolderAndSupervisorAcceptAPendingRequestWhenFlowIsBudgetHolderToSupervisor()
         {
-            string[] tagsOfScenario = ((string[])(null));
+            string[] tagsOfScenario = new string[] {
+                    "ignore"};
             global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
             string pickleIndex = "0";
             global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("TS_001_Budget Holder and Supervisor accept a pending request when flow is budget " +
@@ -153,16 +155,18 @@ namespace GlideGo_WebAutomation_BDD.Features
         [global::NUnit.Framework.TestAttribute()]
         [global::NUnit.Framework.DescriptionAttribute("TS_002_Budget holder rejects a pending request when flow is budget holder to supe" +
             "rvisor")]
+        [global::NUnit.Framework.IgnoreAttribute("Ignored scenario")]
         public async global::System.Threading.Tasks.Task TS_002_BudgetHolderRejectsAPendingRequestWhenFlowIsBudgetHolderToSupervisor()
         {
-            string[] tagsOfScenario = ((string[])(null));
+            string[] tagsOfScenario = new string[] {
+                    "ignore"};
             global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
             string pickleIndex = "1";
             global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("TS_002_Budget holder rejects a pending request when flow is budget holder to supe" +
                     "rvisor", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
             string[] tagsOfRule = ((string[])(null));
             global::Reqnroll.RuleInfo ruleInfo = null;
-#line 14
+#line 15
   this.ScenarioInitialize(scenarioInfo, ruleInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -172,13 +176,13 @@ namespace GlideGo_WebAutomation_BDD.Features
             else
             {
                 await this.ScenarioStartAsync();
-#line 15
+#line 16
     await testRunner.GivenAsync("Open the Application and Get Test Data for \"TS_002\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
-#line 16
+#line 17
     await testRunner.WhenAsync("the budget holder rejects the pending request", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-#line 17
+#line 18
     await testRunner.ThenAsync("the system updates the request status to Rejected", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
@@ -188,16 +192,18 @@ namespace GlideGo_WebAutomation_BDD.Features
         [global::NUnit.Framework.TestAttribute()]
         [global::NUnit.Framework.DescriptionAttribute("TS_003_Supervisor rejects a pending request when flow is budget holder to supervi" +
             "sor")]
+        [global::NUnit.Framework.IgnoreAttribute("Ignored scenario")]
         public async global::System.Threading.Tasks.Task TS_003_SupervisorRejectsAPendingRequestWhenFlowIsBudgetHolderToSupervisor()
         {
-            string[] tagsOfScenario = ((string[])(null));
+            string[] tagsOfScenario = new string[] {
+                    "ignore"};
             global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
             string pickleIndex = "2";
             global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("TS_003_Supervisor rejects a pending request when flow is budget holder to supervi" +
                     "sor", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
             string[] tagsOfRule = ((string[])(null));
             global::Reqnroll.RuleInfo ruleInfo = null;
-#line 19
+#line 21
   this.ScenarioInitialize(scenarioInfo, ruleInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -207,19 +213,19 @@ namespace GlideGo_WebAutomation_BDD.Features
             else
             {
                 await this.ScenarioStartAsync();
-#line 20
+#line 22
     await testRunner.GivenAsync("Open the Application and Get Test Data for \"TS_003\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
-#line 21
+#line 23
     await testRunner.WhenAsync("the budget holder accepts the pending request", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-#line 22
+#line 24
     await testRunner.ThenAsync("the system updates the request status to Accepted for budget holder", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
-#line 23
+#line 25
     await testRunner.WhenAsync("the supervisor rejects the pending request", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-#line 24
+#line 26
     await testRunner.ThenAsync("the system updates the request status to Rejected", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
@@ -238,7 +244,7 @@ namespace GlideGo_WebAutomation_BDD.Features
                     "sor to budget holder", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
             string[] tagsOfRule = ((string[])(null));
             global::Reqnroll.RuleInfo ruleInfo = null;
-#line 26
+#line 29
   this.ScenarioInitialize(scenarioInfo, ruleInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -248,19 +254,19 @@ namespace GlideGo_WebAutomation_BDD.Features
             else
             {
                 await this.ScenarioStartAsync();
-#line 27
+#line 30
     await testRunner.GivenAsync("Open the Application and Get Test Data for \"TS_004\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
-#line 28
+#line 31
     await testRunner.WhenAsync("the supervisor accepts the pending request", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-#line 29
+#line 32
     await testRunner.ThenAsync("the system updates the request status to Accepted for supervisor", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
-#line 30
+#line 33
     await testRunner.WhenAsync("the budget holder accepts the pending request", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-#line 31
+#line 34
     await testRunner.ThenAsync("the system updates the request status to Accepted for budget holder", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
@@ -279,7 +285,7 @@ namespace GlideGo_WebAutomation_BDD.Features
                     "der", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
             string[] tagsOfRule = ((string[])(null));
             global::Reqnroll.RuleInfo ruleInfo = null;
-#line 34
+#line 37
   this.ScenarioInitialize(scenarioInfo, ruleInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -289,13 +295,13 @@ namespace GlideGo_WebAutomation_BDD.Features
             else
             {
                 await this.ScenarioStartAsync();
-#line 35
+#line 38
     await testRunner.GivenAsync("Open the Application and Get Test Data for \"TS_005\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
-#line 36
+#line 39
     await testRunner.WhenAsync("the supervisor rejects the pending request", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-#line 37
+#line 40
     await testRunner.ThenAsync("the system updates the request status to Rejected", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
@@ -314,7 +320,7 @@ namespace GlideGo_WebAutomation_BDD.Features
                     "holder", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
             string[] tagsOfRule = ((string[])(null));
             global::Reqnroll.RuleInfo ruleInfo = null;
-#line 39
+#line 42
   this.ScenarioInitialize(scenarioInfo, ruleInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -324,19 +330,19 @@ namespace GlideGo_WebAutomation_BDD.Features
             else
             {
                 await this.ScenarioStartAsync();
-#line 40
+#line 43
     await testRunner.GivenAsync("Open the Application and Get Test Data for \"TS_006\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
-#line 41
+#line 44
     await testRunner.WhenAsync("the supervisor accepts the pending request", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-#line 42
+#line 45
     await testRunner.ThenAsync("the system updates the request status to Accepted for supervisor", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
-#line 43
+#line 46
     await testRunner.WhenAsync("the budget holder rejects the pending request", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-#line 44
+#line 47
     await testRunner.ThenAsync("the system updates the request status to Rejected", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }

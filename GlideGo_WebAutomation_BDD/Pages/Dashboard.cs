@@ -12,7 +12,7 @@ namespace GlideGoWeb.PageObjects
         private readonly IPage page;
 
      
-        private const string ProfileIconLoc = "//html[1]/body[1]/div[1]/div[1]/div[3]/div[1]/div[2]/div[6]/div[2]";
+        private const string ProfileIconLoc = "//div[@class='rf-page-header-action-item-userletter']";
         private const string LogoutButtonLoc = "//a[normalize-space()='Logout']";
         private const string CreateTripLoc = "//button[@class='link-button active']";
         private const string ReviewApprovalLoc = "//button[normalize-space()='Review & Approve']";

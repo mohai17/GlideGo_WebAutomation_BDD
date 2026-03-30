@@ -18,7 +18,7 @@ namespace GlideGoWeb.PageObjects
         private const string DestinationPointInput = "//input[@placeholder='Choose destination...']";
         private const string AddDestinationButton = "//span[normalize-space()='Add destination']";
         private const string NextButton = "//div[@class='routebar-rf-tab-footer-button routebar-rf-tab-footer-button-send False']";
-        private const string FoundLocationButton = "//div[@class='routebar-rf-location-list']//div[2]//span[1]//span[1]";
+        private const string FoundLocationButton = "(//div[@class='routebar-rf-location-item'])[1]";
         private const string MapLodingLoc = "div.leaflet-tile-container img.leaflet-tile";
         public ChooseDirectionPage(IPage page)
         {
@@ -71,7 +71,7 @@ namespace GlideGoWeb.PageObjects
 
             await (await WaitForVisibleAsync(FoundLocationButton)).ClickAsync();
             await page.WaitForSelectorAsync(MapLodingLoc,
-                            new() { State = WaitForSelectorState.Visible, Timeout = 10000 });
+                            new() { State = WaitForSelectorState.Visible, Timeout = 30000 });
 
             await Task.Delay(1000);
 

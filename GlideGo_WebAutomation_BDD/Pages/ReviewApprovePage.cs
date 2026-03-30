@@ -30,14 +30,27 @@ namespace GlideGoWeb.PageObjects
         {
             ExtentReporting.LogInfo($"Click on trip details for Trip ID: {tripId}");
 
-            //await page.EvaluateAsync("document.body.style.zoom = '70%'");
 
             string tripDetailsLoc = $"//span[normalize-space()='{tripId}']/ancestor::div[2]//a[normalize-space()='View Details']";
 
-            var element = await WaitForVisibleAsync(tripDetailsLoc);
-            await element.ScrollIntoViewIfNeededAsync();
-            await element.ClickAsync();
-            
+            var locator = await WaitForVisibleAsync(tripDetailsLoc);
+
+            for (int i = 0; i < 20; i++)
+            {
+                if (await locator.IsVisibleAsync())
+                    break;
+
+                await page.EvaluateAsync("window.scrollBy(0, 300)");
+
+                await page.WaitForTimeoutAsync(500);
+            }
+
+            await locator.ClickAsync();
+
+
+
+
+
         }
 
     }

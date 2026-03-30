@@ -1,4 +1,5 @@
 ﻿using Microsoft.Playwright;
+using Microsoft.VisualBasic;
 using ProjectUtilityDateHelper;
 using ProjectUtilityReporting;
 
@@ -122,13 +123,14 @@ namespace GlideGoWeb.PageObjects
 
         public async Task ClickOnPickUpDateAndTime()
         {
-            //ExtentReporting.LogInfo("Click on the Pick up date and time");
+            //ExtentReporting.LogInfo("Click on Pickup date and time");
             //await page.EvaluateAsync("window.scrollBy(0, 50)");
 
             var loc = L(Sel.PickupDateTimeInput);
             await WaitVisibleAsync(loc);
             await loc.ScrollIntoViewIfNeededAsync();
             await loc.ClickAsync();
+
         }
 
         public async Task PickUpDateAndTimeSelection(string dateTime)
@@ -136,12 +138,13 @@ namespace GlideGoWeb.PageObjects
             ExtentReporting.LogInfo($"Set Pick up date and time selection: {dateTime}");
             var dtSeperation = DateHelper.DateTimeSeparation(dateTime);
 
+
             string day = dtSeperation[0];
             string month = dtSeperation[1];
             string year = dtSeperation[2];
             string hours = dtSeperation[4];
             string minutes = dtSeperation[5];
-            string seconds = dtSeperation[6];
+            //string seconds = dtSeperation[6];
             string meridiem = dtSeperation[7];
 
             var yearInput = L(Sel.DatepickerYearInput);
@@ -174,10 +177,10 @@ namespace GlideGoWeb.PageObjects
             await minutesInput.ScrollIntoViewIfNeededAsync();
             await minutesInput.FillAsync(minutes);
 
-            var secondsInput = L(Sel.TimeSecondsInput);
-            await WaitVisibleAsync(secondsInput);
-            await secondsInput.ScrollIntoViewIfNeededAsync();
-            await secondsInput.FillAsync(seconds);
+            //var secondsInput = L(Sel.TimeSecondsInput);
+            //await WaitVisibleAsync(secondsInput);
+            //await secondsInput.ScrollIntoViewIfNeededAsync();
+            //await secondsInput.FillAsync(seconds);
 
             var meridiemBtn = L(Sel.Meridiem(meridiem));
             await WaitVisibleAsync(meridiemBtn);
@@ -192,11 +195,14 @@ namespace GlideGoWeb.PageObjects
 
         public async Task ClickOnDropOffDateAndTime()
         {
-            ExtentReporting.LogInfo("Click on the drop off date and time");
+            //ExtentReporting.LogInfo("Click on drop off date and time");
+
+
             var loc = L(Sel.DropoffDateTimeInput);
             await WaitVisibleAsync(loc);
             await loc.ScrollIntoViewIfNeededAsync();
             await loc.ClickAsync();
+
         }
 
         public async Task DropOffDateTime(string dateTime)
@@ -243,10 +249,10 @@ namespace GlideGoWeb.PageObjects
             await minutesInput.ScrollIntoViewIfNeededAsync();
             await minutesInput.FillAsync(minutes);
 
-            var secondsInput = L(Sel.TimeSecondsInput);
-            await WaitVisibleAsync(secondsInput);
-            await secondsInput.ScrollIntoViewIfNeededAsync();
-            await secondsInput.FillAsync(seconds);
+            //var secondsInput = L(Sel.TimeSecondsInput);
+            //await WaitVisibleAsync(secondsInput);
+            //await secondsInput.ScrollIntoViewIfNeededAsync();
+            //await secondsInput.FillAsync(seconds);
 
             var meridiemBtn = L(Sel.Meridiem(meridiem));
             await WaitVisibleAsync(meridiemBtn);

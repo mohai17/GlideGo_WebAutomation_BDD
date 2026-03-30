@@ -156,6 +156,7 @@ namespace GlideGo_WebAutomation_BDD.StepDefinitions
                 await dash.ClickOnReviewAndApproval();
                 await review.ClickOnTripDetails(tripId);
                 await approval.ClickOnApproveButton();
+                await approval.ClickOnConfirmApprovalButton();
 
                 bool Result1 = await approval.IsSuccessfullyApproved();
                 ExtentReporting.LogScreenshot("Approval", await ScreenshotHelper.TakeScreenshotAsync(page, "Element"));
